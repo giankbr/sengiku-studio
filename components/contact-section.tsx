@@ -5,7 +5,7 @@ import type React from "react"
 import { useEffect, useRef, useState } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Mail, MapPin, Phone, Clock } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -93,99 +93,162 @@ export default function ContactSection() {
   }
 
   return (
-    <section ref={sectionRef} id="contact" className="py-20 bg-muted dark:bg-zinc-900">
+    <section ref={sectionRef} id="contact" className="py-24 bg-muted dark:bg-zinc-900">
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
           <h2 className="contact-title text-4xl md:text-5xl lg:text-6xl font-bold mb-12 text-center">
             Got a project? <span className="italic font-normal">Let's talk.</span>
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-12">
-            <div className="contact-form">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-2">
-                    Name
-                  </label>
-                  <Input
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="What's your name?"
-                    required
-                    className="w-full bg-background dark:bg-zinc-800"
-                  />
-                </div>
+          <div className="bg-background dark:bg-black rounded-2xl shadow-lg overflow-hidden">
+            <div className="grid md:grid-cols-2">
+              {/* Contact Form */}
+              <div className="contact-form p-8 md:p-12">
+                <h3 className="text-2xl font-bold mb-6">Send us a message</h3>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium mb-2">
+                      Name
+                    </label>
+                    <Input
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="What's your name?"
+                      required
+                      className="w-full"
+                    />
+                  </div>
 
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2">
-                    Email
-                  </label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="your@email.com"
-                    required
-                    className="w-full bg-background dark:bg-zinc-800"
-                  />
-                </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium mb-2">
+                      Email
+                    </label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="your@email.com"
+                      required
+                      className="w-full"
+                    />
+                  </div>
 
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2">
-                    Message
-                  </label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Tell us about your project..."
-                    rows={5}
-                    required
-                    className="w-full bg-background dark:bg-zinc-800"
-                  />
-                </div>
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium mb-2">
+                      Message
+                    </label>
+                    <Textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder="Tell us about your project..."
+                      rows={5}
+                      required
+                      className="w-full"
+                    />
+                  </div>
 
-                <Button type="submit" className="rounded-full w-full">
-                  Send Message <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </form>
-            </div>
+                  <Button type="submit" className="rounded-full w-full">
+                    Send Message <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </form>
+              </div>
 
-            <div className="contact-info space-y-8">
-              <div>
-                <h3 className="text-xl font-bold mb-4">Contact Information</h3>
-                <p className="text-muted-foreground mb-2">
+              {/* Contact Information */}
+              <div className="contact-info bg-primary/5 dark:bg-primary/10 p-8 md:p-12">
+                <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
+                <p className="text-muted-foreground mb-8">
                   Feel free to reach out to us through any of these channels:
                 </p>
-              </div>
 
-              <div>
-                <h4 className="text-sm font-medium mb-2">Email</h4>
-                <p className="text-lg mb-4">hello@sengikustudio.com</p>
+                <div className="space-y-8">
+                  <div className="flex items-start">
+                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4 flex-shrink-0">
+                      <Mail className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-medium mb-1">Email</h4>
+                      <a href="mailto:hello@sengikustudio.com" className="text-lg hover:text-primary transition-colors">
+                        hello@sengikustudio.com
+                      </a>
+                    </div>
+                  </div>
 
-                <h4 className="text-sm font-medium mb-2">Phone</h4>
-                <p className="text-lg mb-4">+1 891 989-11-91</p>
+                  <div className="flex items-start">
+                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4 flex-shrink-0">
+                      <Phone className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-medium mb-1">Phone</h4>
+                      <a href="tel:+18919891191" className="text-lg hover:text-primary transition-colors">
+                        +1 891 989-11-91
+                      </a>
+                    </div>
+                  </div>
 
-                <h4 className="text-sm font-medium mb-2">Address</h4>
-                <p className="text-lg">
-                  2372 Westheimer Rd,
-                  <br />
-                  Jakarta, Indonesia 85485
-                </p>
-              </div>
+                  <div className="flex items-start">
+                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4 flex-shrink-0">
+                      <MapPin className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-medium mb-1">Address</h4>
+                      <p className="text-lg">
+                        2372 Westheimer Rd,
+                        <br />
+                        Jakarta, Indonesia 85485
+                      </p>
+                    </div>
+                  </div>
 
-              <div>
-                <h4 className="text-sm font-medium mb-2">Working Hours</h4>
-                <p className="text-muted-foreground">
-                  Monday - Friday: 9:00 AM - 6:00 PM
-                  <br />
-                  Weekend: Closed
-                </p>
+                  <div className="flex items-start">
+                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4 flex-shrink-0">
+                      <Clock className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-medium mb-1">Working Hours</h4>
+                      <p className="text-muted-foreground">
+                        Monday - Friday: 9:00 AM - 6:00 PM
+                        <br />
+                        Weekend: Closed
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-12 pt-8 border-t border-border">
+                  <h4 className="text-sm font-medium mb-4">Follow Us</h4>
+                  <div className="flex gap-4">
+                    <a
+                      href="#"
+                      className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary/10 transition-colors"
+                    >
+                      <span className="font-medium">Be</span>
+                    </a>
+                    <a
+                      href="#"
+                      className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary/10 transition-colors"
+                    >
+                      <span className="text-lg">◎</span>
+                    </a>
+                    <a
+                      href="#"
+                      className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary/10 transition-colors"
+                    >
+                      <span className="text-lg">𝕏</span>
+                    </a>
+                    <a
+                      href="#"
+                      className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary/10 transition-colors"
+                    >
+                      <span className="text-lg">◼</span>
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

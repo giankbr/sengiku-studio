@@ -11,7 +11,7 @@ const sora = Sora({
 
 export const metadata: Metadata = {
   title: 'Sengiku Studio | Web Design & Development',
-  description: 'We create stunning digital experiences that drive results. Sengiku Studio is a professional web studio specializing in web design, development, and digital solutions.',
+  description: 'We create stunning digital experiences that drive results. Sengiku Studio is a professional web studio specializing in web design, development, and digital solutions..',
 };
 
 export default function RootLayout({

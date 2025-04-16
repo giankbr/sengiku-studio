@@ -77,10 +77,11 @@ export default function StatsSection() {
   return (
     <section ref={sectionRef} className="py-20 bg-background dark:bg-black">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 gap-12 items-start">
-          <div>
-            <div className="stats-content">
-              <p className="text-sm font-medium mb-4">Digital Agency based in Jakarta, ID</p>
+        <div className="flex flex-col lg:flex-row gap-16">
+          {/* Left side content */}
+          <div className="lg:w-1/2">
+            <div className="stats-content max-w-xl">
+              <h2 className="text-xl font-medium mb-4">Digital Agency based in Jakarta, ID</h2>
               <p className="text-xl md:text-2xl leading-relaxed mb-8">
                 Explore our work, where creativity seamlessly meets purpose, pushing boundaries and transforming ideas
                 into impactful experiences. We believe in crafting designs that not only captivate but also drive
@@ -94,13 +95,20 @@ export default function StatsSection() {
             </div>
           </div>
 
-          <div ref={countersRef} className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {stats.map((stat, index) => (
-              <div key={index} className="stat-counter bg-muted rounded-lg p-6 dark:bg-zinc-900">
-                <div className="text-5xl font-bold mb-4">{stat.value}</div>
-                <p className="text-sm text-muted-foreground">{stat.description}</p>
-              </div>
-            ))}
+          {/* Right side stats */}
+          <div ref={countersRef} className="lg:w-1/2">
+            <div className="grid gap-6">
+              {stats.map((stat, index) => (
+                <div key={index} className="stat-counter flex flex-col md:flex-row gap-6 items-start">
+                  <div className="bg-primary/10 dark:bg-primary/5 rounded-lg p-6 w-24 h-24 flex items-center justify-center flex-shrink-0">
+                    <span className="text-4xl font-bold text-primary">{stat.value}</span>
+                  </div>
+                  <div className="flex-1 pt-2">
+                    <p className="text-muted-foreground">{stat.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
