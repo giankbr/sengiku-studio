@@ -2,7 +2,6 @@
 
 import Footer from '@/components/footer';
 import Navbar from '@/components/navbar';
-import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
 import { gsap } from 'gsap';
 import { ArrowRight } from 'lucide-react';
@@ -119,11 +118,8 @@ export default function AboutPage() {
 
   return (
     <div ref={pageRef} className="min-h-screen">
-      <div className="fixed top-4 right-4 z-50">
-        <ThemeToggle />
-      </div>
+      E
       <Navbar />
-
       <main className="pt-24 pb-20">
         <div className="container mx-auto px-4">
           {/* Hero Section */}
@@ -217,7 +213,6 @@ export default function AboutPage() {
           </div>
         </div>
       </main>
-
       <Footer />
     </div>
   );

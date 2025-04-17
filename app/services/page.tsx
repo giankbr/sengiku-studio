@@ -2,7 +2,6 @@
 
 import Footer from '@/components/footer';
 import Navbar from '@/components/navbar';
-import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
 import { gsap } from 'gsap';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
@@ -66,9 +65,6 @@ export default function ServicesPage() {
 
   return (
     <div ref={pageRef} className="min-h-screen">
-      <div className="fixed top-4 right-4 z-50">
-        <ThemeToggle />
-      </div>
       <Navbar />
 
       <main className="pt-24 pb-20">

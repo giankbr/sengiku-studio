@@ -1,28 +1,27 @@
-"use client"
+'use client';
 
-import { useEffect, useRef } from "react"
-import { gsap } from "gsap"
-import { ArrowLeft, Calendar, Clock, Share2, User } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import Navbar from "@/components/navbar"
-import Footer from "@/components/footer"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { useParams } from "next/navigation"
-import { Input } from "@/components/ui/input"
+import Footer from '@/components/footer';
+import Navbar from '@/components/navbar';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { gsap } from 'gsap';
+import { ArrowLeft, Calendar, Clock, Share2, User } from 'lucide-react';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
+import { useEffect, useRef } from 'react';
 
 // This would typically come from a database or API
 const blogPostsData = {
-  "building-positive-office": {
-    title: "Building a Positive Office Environment for Designers",
+  'building-positive-office': {
+    title: 'Building a Positive Office Environment for Designers',
     excerpt:
       "A well-designed workspace can fuel creativity, productivity, and teamwork in the design industry. This blog post explores how to create an inspiring office environment that meets designers' unique needs.",
-    date: "Nov 4, 2024",
-    author: "Aiko Tanaka",
-    authorRole: "Creative Director",
-    readTime: "5 min read",
-    category: "Design",
-    image: "/placeholder.svg?height=800&width=1200",
+    date: 'Nov 4, 2024',
+    author: 'Aiko Tanaka',
+    authorRole: 'Creative Director',
+    readTime: '5 min read',
+    category: 'Design',
+    image: '/placeholder.svg?height=800&width=1200',
     content: `
       <h2>Introduction</h2>
       <p>The environment in which designers work plays a crucial role in their creativity, productivity, and overall job satisfaction. As the design industry continues to evolve, so too does our understanding of what makes an effective workspace for creative professionals. This article explores the key elements of creating a positive office environment specifically tailored to the needs of designers.</p>
@@ -75,19 +74,19 @@ const blogPostsData = {
       <h2>Conclusion</h2>
       <p>Creating an optimal environment for designers requires attention to both physical and cultural elements. By thoughtfully addressing workspace design, available tools, and team dynamics, organizations can foster conditions where creativity flourishes and designers can do their best work. Remember that the perfect environment will vary depending on your team's specific needs and work styles—regular check-ins and willingness to adapt are essential to maintaining a positive office environment over time.</p>
     `,
-    tags: ["Workspace Design", "Creativity", "Productivity", "Team Culture"],
-    relatedPosts: ["crafting-experiences", "managing-creative-teams", "effective-online-meetings"],
+    tags: ['Workspace Design', 'Creativity', 'Productivity', 'Team Culture'],
+    relatedPosts: ['crafting-experiences', 'managing-creative-teams', 'effective-online-meetings'],
   },
-  "crafting-experiences": {
-    title: "Crafting Experiences that Keep Visitors Coming Back",
+  'crafting-experiences': {
+    title: 'Crafting Experiences that Keep Visitors Coming Back',
     excerpt:
       "User experience (UX) is at the heart of every successful design project. This article covers the principles of user-centric design, from research to prototyping, and explains how prioritizing the user's journey leads to more engaging digital products.",
-    date: "Nov 4, 2024",
-    author: "Ryo Nakamura",
-    authorRole: "Lead UI/UX Designer",
-    readTime: "7 min read",
-    category: "UX/UI",
-    image: "/placeholder.svg?height=800&width=1200",
+    date: 'Nov 4, 2024',
+    author: 'Ryo Nakamura',
+    authorRole: 'Lead UI/UX Designer',
+    readTime: '7 min read',
+    category: 'UX/UI',
+    image: '/placeholder.svg?height=800&width=1200',
     content: `
       <h2>Introduction</h2>
       <p>In today's digital landscape, creating a website or application that merely looks good is no longer enough. Users expect intuitive, engaging, and memorable experiences that solve their problems efficiently. This article explores how to craft digital experiences that not only attract visitors but keep them coming back.</p>
@@ -143,19 +142,19 @@ const blogPostsData = {
       <h2>Conclusion</h2>
       <p>Crafting experiences that keep visitors coming back requires a thoughtful blend of user research, emotional design, storytelling, and continuous improvement. By putting users at the center of your design process and focusing on creating meaningful connections, you can build digital products that not only meet functional needs but also create lasting relationships with your audience. Remember that great user experience is never "finished"—it's an ongoing conversation between your brand and your users.</p>
     `,
-    tags: ["User Experience", "UX Design", "User Research", "Digital Design"],
-    relatedPosts: ["building-positive-office", "managing-creative-teams", "typography-fundamentals"],
+    tags: ['User Experience', 'UX Design', 'User Research', 'Digital Design'],
+    relatedPosts: ['building-positive-office', 'managing-creative-teams', 'typography-fundamentals'],
   },
-  "managing-creative-teams": {
-    title: "Managing Creative Teams in the Design Industry",
+  'managing-creative-teams': {
+    title: 'Managing Creative Teams in the Design Industry',
     excerpt:
-      "Managing a team of designers requires a unique blend of creativity, leadership, and strategy. This post delves into effective ways to inspire, motivate, and guide a design team while balancing deadlines, client demands, and creative excellence.",
-    date: "Nov 4, 2024",
-    author: "Takashi Ito",
-    authorRole: "Project Manager",
-    readTime: "6 min read",
-    category: "Design",
-    image: "/placeholder.svg?height=800&width=1200",
+      'Managing a team of designers requires a unique blend of creativity, leadership, and strategy. This post delves into effective ways to inspire, motivate, and guide a design team while balancing deadlines, client demands, and creative excellence.',
+    date: 'Nov 4, 2024',
+    author: 'Takashi Ito',
+    authorRole: 'Project Manager',
+    readTime: '6 min read',
+    category: 'Design',
+    image: '/placeholder.svg?height=800&width=1200',
     content: `
       <h2>Introduction</h2>
       <p>Leading a team of creative professionals presents unique challenges and opportunities. Design teams thrive under different conditions than other departments, requiring leadership approaches that balance structure with creative freedom. This article explores strategies for effectively managing creative teams in the design industry.</p>
@@ -216,17 +215,17 @@ const blogPostsData = {
       <h2>Conclusion</h2>
       <p>Managing creative teams effectively requires a delicate balance of structure and freedom, clear communication, and genuine appreciation for the creative process. By creating an environment where designers feel both supported and challenged, leaders can unlock their team's full creative potential while meeting business objectives. Remember that great creative leadership is often more about removing obstacles and providing resources than directing every decision—trust your team's expertise and give them the conditions they need to excel.</p>
     `,
-    tags: ["Leadership", "Team Management", "Creative Process", "Design Teams"],
-    relatedPosts: ["building-positive-office", "crafting-experiences", "effective-online-meetings"],
+    tags: ['Leadership', 'Team Management', 'Creative Process', 'Design Teams'],
+    relatedPosts: ['building-positive-office', 'crafting-experiences', 'effective-online-meetings'],
   },
-}
+};
 
 export default function BlogDetailPage() {
-  const pageRef = useRef<HTMLDivElement>(null)
-  const params = useParams()
-  const postId = params.id as string
+  const pageRef = useRef<HTMLDivElement>(null);
+  const params = useParams();
+  const postId = params.id as string;
 
-  const post = blogPostsData[postId as keyof typeof blogPostsData]
+  const post = blogPostsData[postId as keyof typeof blogPostsData];
 
   // Fallback if post doesn't exist
   if (!post) {
@@ -241,20 +240,16 @@ export default function BlogDetailPage() {
           </Link>
         </div>
       </div>
-    )
+    );
   }
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Animate page elements
-      gsap.fromTo(
-        ".fade-in",
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: "power2.out" },
-      )
+      gsap.fromTo('.fade-in', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power2.out' });
 
       // Animate related posts
-      gsap.utils.toArray(".related-post").forEach((item: any, i) => {
+      gsap.utils.toArray('.related-post').forEach((item: any, i) => {
         gsap.fromTo(
           item,
           { opacity: 0, y: 20 },
@@ -263,23 +258,23 @@ export default function BlogDetailPage() {
             y: 0,
             duration: 0.6,
             delay: 0.3 + i * 0.1,
-            ease: "power2.out",
+            ease: 'power2.out',
             scrollTrigger: {
               trigger: item,
-              start: "top 85%",
+              start: 'top 85%',
             },
-          },
-        )
-      })
-    }, pageRef)
+          }
+        );
+      });
+    }, pageRef);
 
-    return () => ctx.revert()
-  }, [])
+    return () => ctx.revert();
+  }, []);
 
   // Get related posts data
   const relatedPosts = post.relatedPosts
     .map((id) => {
-      const relatedPost = blogPostsData[id as keyof typeof blogPostsData]
+      const relatedPost = blogPostsData[id as keyof typeof blogPostsData];
       return relatedPost
         ? {
             id,
@@ -289,33 +284,25 @@ export default function BlogDetailPage() {
             date: relatedPost.date,
             readTime: relatedPost.readTime,
           }
-        : null
+        : null;
     })
-    .filter(Boolean)
+    .filter(Boolean);
 
   return (
     <div ref={pageRef} className="min-h-screen">
-      <div className="fixed top-4 right-4 z-50">
-        <ThemeToggle />
-      </div>
       <Navbar />
 
       <main className="pt-24 pb-20">
         <div className="container mx-auto px-4">
           {/* Back to blogs link */}
-          <Link
-            href="/blogs"
-            className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-6"
-          >
+          <Link href="/blogs" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-6">
             <ArrowLeft className="mr-2 h-4 w-4" /> Back to Blogs
           </Link>
 
           {/* Blog Header */}
           <div className="max-w-4xl mx-auto mb-8">
             <div className="fade-in mb-4">
-              <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">
-                {post.category}
-              </span>
+              <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">{post.category}</span>
             </div>
             <h1 className="fade-in text-3xl md:text-4xl lg:text-5xl font-bold mb-6">{post.title}</h1>
 
@@ -339,24 +326,18 @@ export default function BlogDetailPage() {
 
           {/* Featured Image */}
           <div className="fade-in max-w-4xl mx-auto mb-10">
-            <img src={post.image || "/placeholder.svg"} alt={post.title} className="w-full rounded-lg" />
+            <img src={post.image || '/placeholder.svg'} alt={post.title} className="w-full rounded-lg" />
           </div>
 
           {/* Blog Content */}
           <div className="fade-in max-w-3xl mx-auto mb-16">
-            <div
-              className="prose prose-lg dark:prose-invert max-w-none"
-              dangerouslySetInnerHTML={{ __html: post.content }}
-            />
+            <div className="prose prose-lg dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
 
             {/* Tags */}
             <div className="mt-10 pt-6 border-t">
               <div className="flex flex-wrap gap-2">
                 {post.tags.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="px-3 py-1 rounded-full bg-muted text-sm text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors cursor-pointer"
-                  >
+                  <span key={index} className="px-3 py-1 rounded-full bg-muted text-sm text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors cursor-pointer">
                     {tag}
                   </span>
                 ))}
@@ -375,11 +356,7 @@ export default function BlogDetailPage() {
           {/* Author Bio */}
           <div className="fade-in max-w-3xl mx-auto mb-16 p-6 bg-muted dark:bg-zinc-900 rounded-lg flex flex-col md:flex-row gap-6 items-center md:items-start">
             <div className="w-20 h-20 rounded-full overflow-hidden flex-shrink-0">
-              <img
-                src="/placeholder.svg?height=200&width=200"
-                alt={post.author}
-                className="w-full h-full object-cover"
-              />
+              <img src="/placeholder.svg?height=200&width=200" alt={post.author} className="w-full h-full object-cover" />
             </div>
             <div>
               <h3 className="text-xl font-bold mb-1">{post.author}</h3>
@@ -388,8 +365,8 @@ export default function BlogDetailPage() {
               <h3 className="text-xl font-bold mb-1">{post.author}</h3>
               <p className="text-sm text-primary mb-2">{post.authorRole}</p>
               <p className="text-sm text-muted-foreground">
-                A passionate designer with over a decade of experience in creating meaningful digital experiences.
-                Specializing in user-centered design approaches that balance aesthetics with functionality.
+                A passionate designer with over a decade of experience in creating meaningful digital experiences. Specializing in user-centered design approaches that balance aesthetics with
+                functionality.
               </p>
             </div>
           </div>
@@ -402,20 +379,14 @@ export default function BlogDetailPage() {
                 {relatedPosts.map((relatedPost, index) => (
                   <Link href={`/blogs/${relatedPost.id}`} key={index} className="related-post group">
                     <div className="mb-4 overflow-hidden rounded-lg">
-                      <img
-                        src={relatedPost.image || "/placeholder.svg"}
-                        alt={relatedPost.title}
-                        className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
+                      <img src={relatedPost.image || '/placeholder.svg'} alt={relatedPost.title} className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
                     </div>
                     <div className="space-y-2">
                       <div className="flex justify-between items-center text-sm text-muted-foreground">
                         <span>{relatedPost.date}</span>
                         <span>{relatedPost.readTime}</span>
                       </div>
-                      <h3 className="text-lg font-bold group-hover:text-primary transition-colors line-clamp-2">
-                        {relatedPost.title}
-                      </h3>
+                      <h3 className="text-lg font-bold group-hover:text-primary transition-colors line-clamp-2">{relatedPost.title}</h3>
                     </div>
                   </Link>
                 ))}
@@ -426,9 +397,7 @@ export default function BlogDetailPage() {
           {/* Newsletter */}
           <div className="fade-in max-w-3xl mx-auto py-10 px-8 bg-muted dark:bg-zinc-900 rounded-lg text-center">
             <h3 className="text-xl font-bold mb-4">Enjoyed this article?</h3>
-            <p className="text-muted-foreground mb-6">
-              Subscribe to our newsletter to get more insights on design, creativity, and industry trends.
-            </p>
+            <p className="text-muted-foreground mb-6">Subscribe to our newsletter to get more insights on design, creativity, and industry trends.</p>
             <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
               <Input type="email" placeholder="Enter your email" className="flex-1" />
               <Button>Subscribe</Button>
@@ -439,5 +408,5 @@ export default function BlogDetailPage() {
 
       <Footer />
     </div>
-  )
+  );
 }
