@@ -36,7 +36,7 @@ export default function HeroSection() {
             </h1>
 
             <p className="hero-subtitle text-lg md:text-xl text-muted-foreground mt-6 max-w-2xl mx-auto md:mx-0">
-              Unlock the full potential of your brand with our creative design solutions. We transform ideas into impactful experiences that captivate and connect.
+              Build fast, modern, and scalable websites that empower your brand online. We turn technical complexity into seamless digital experiences.
             </p>
 
             <div className="hero-cta flex flex-col md:flex-row items-center gap-4 mt-8 justify-center md:justify-start">
