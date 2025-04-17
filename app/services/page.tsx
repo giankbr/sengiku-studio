@@ -1,76 +1,68 @@
-"use client"
+'use client';
 
-import { useEffect, useRef } from "react"
-import { gsap } from "gsap"
-import { ArrowRight, ArrowUpRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import Navbar from "@/components/navbar"
-import Footer from "@/components/footer"
-import { ThemeToggle } from "@/components/theme-toggle"
+import Footer from '@/components/footer';
+import Navbar from '@/components/navbar';
+import { ThemeToggle } from '@/components/theme-toggle';
+import { Button } from '@/components/ui/button';
+import { gsap } from 'gsap';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import Link from 'next/link';
+import { useEffect, useRef } from 'react';
 
 const services = [
   {
-    id: "graphic-design",
-    title: "Graphic Design",
-    description: "We create visual concepts that inspire, inform, and captivate consumers.",
-    image: "/placeholder.svg?height=400&width=600",
-    items: ["Logo Design", "Book Cover Design", "Digital Marketing", "Social Media"],
+    id: 'web-development',
+    title: 'Web Development',
+    description: 'We build fast, responsive, and user-friendly websites using the latest web technologies.',
+    image: '/placeholder.svg?height=400&width=600',
+    items: ['Next.js', 'React', 'Vue.js', 'WordPress', 'Tailwind CSS', 'Full-Stack'],
   },
   {
-    id: "product-design",
-    title: "Product Design",
-    description: "We design digital products with a focus on user experience and interface design.",
-    image: "/placeholder.svg?height=400&width=600",
-    items: ["UI/UX Design", "Web Design", "Mobile App Design", "Dashboard Design"],
+    id: 'e-commerce',
+    title: 'E-commerce Solutions',
+    description: 'We develop custom online stores that drive sales and provide seamless shopping experiences.',
+    image: '/placeholder.svg?height=400&width=600',
+    items: ['Shopify', 'WooCommerce', 'Custom Stores', 'Payment Integration', 'Inventory Management'],
   },
   {
-    id: "illustration",
-    title: "Illustration",
-    description: "We create custom illustrations that tell your story and enhance your brand.",
-    image: "/placeholder.svg?height=400&width=600",
-    items: ["Character Art", "Vector Illustration", "Book Illustration", "Digital Art"],
+    id: 'backend-systems',
+    title: 'Backend Systems',
+    description: 'We architect robust, scalable backend systems that power your digital products.',
+    image: '/placeholder.svg?height=400&width=600',
+    items: ['API Development', 'Node.js', 'Python', 'Database Design', 'Serverless Functions', 'CMS Integration'],
   },
   {
-    id: "branding",
-    title: "Branding",
-    description: "We develop comprehensive brand identities that resonate with your audience.",
-    image: "/placeholder.svg?height=400&width=600",
-    items: ["Brand Strategy", "Visual Identity", "Brand Guidelines", "Rebranding"],
+    id: 'digital-transformation',
+    title: 'Digital Transformation',
+    description: 'We help businesses modernize their digital infrastructure for improved efficiency and growth.',
+    image: '/placeholder.svg?height=400&width=600',
+    items: ['Legacy System Migration', 'Cloud Deployment', 'DevOps', 'Microservices', 'Performance Optimization'],
   },
   {
-    id: "motion-graphics",
-    title: "Motion Graphics",
-    description: "We bring your ideas to life through animation and motion design.",
-    image: "/placeholder.svg?height=400&width=600",
-    items: ["2D Animation", "3D Animation", "Explainer Videos", "Motion Branding"],
+    id: 'web-applications',
+    title: 'Web Applications',
+    description: 'We create custom web applications that solve complex business problems and streamline operations.',
+    image: '/placeholder.svg?height=400&width=600',
+    items: ['SaaS Products', 'Admin Dashboards', 'Customer Portals', 'Web Tools', 'Progressive Web Apps'],
   },
-]
+];
 
 export default function ServicesPage() {
-  const pageRef = useRef<HTMLDivElement>(null)
+  const pageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Animate page title
-      gsap.fromTo(
-        ".page-title",
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, delay: 0.2, ease: "power2.out" },
-      )
+      gsap.fromTo('.page-title', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.2, ease: 'power2.out' });
 
       // Animate service items
-      gsap.utils.toArray(".service-card").forEach((card: any, i) => {
-        gsap.fromTo(
-          card,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.8, delay: 0.2 + i * 0.1, ease: "power2.out" },
-        )
-      })
-    }, pageRef)
+      gsap.utils.toArray('.service-card').forEach((card: any, i) => {
+        gsap.fromTo(card, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.2 + i * 0.1, ease: 'power2.out' });
+      });
+    }, pageRef);
 
-    return () => ctx.revert()
-  }, [])
+    return () => ctx.revert();
+  }, []);
 
   return (
     <div ref={pageRef} className="min-h-screen">
@@ -86,8 +78,7 @@ export default function ServicesPage() {
               Our <span className="italic font-normal">Services</span>
             </h1>
             <p className="text-lg text-muted-foreground">
-              We offer a comprehensive range of design services to help your brand stand out. From branding to
-              illustration, we've got you covered.
+              We offer comprehensive web development services to power your digital presence. From responsive websites to complex applications, we build solutions that drive results.
             </p>
           </div>
 
@@ -109,18 +100,13 @@ export default function ServicesPage() {
 
                     <Link href={`/services/${service.id}`}>
                       <Button variant="outline" className="rounded-full group">
-                        Learn More{" "}
-                        <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                        Learn More <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                       </Button>
                     </Link>
                   </div>
 
                   <div className="order-first md:order-last">
-                    <img
-                      src={service.image || "/placeholder.svg"}
-                      alt={service.title}
-                      className="w-full rounded-lg object-cover aspect-video"
-                    />
+                    <img src={service.image || '/placeholder.svg'} alt={service.title} className="w-full rounded-lg object-cover aspect-video" />
                   </div>
                 </div>
               </div>
@@ -128,13 +114,11 @@ export default function ServicesPage() {
           </div>
 
           <div className="mt-20 text-center">
-            <h3 className="text-2xl font-bold mb-4">Ready to start your project?</h3>
-            <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-              Let's collaborate to bring your vision to life. Our team is ready to help you create something amazing.
-            </p>
+            <h3 className="text-2xl font-bold mb-4">Ready to launch your web project?</h3>
+            <p className="text-muted-foreground mb-8 max-w-xl mx-auto">Let's build something exceptional together. Our team of web specialists is ready to turn your ideas into reality.</p>
             <Link href="/contact">
               <Button className="rounded-full px-8">
-                Get in Touch <ArrowUpRight className="ml-2 h-4 w-4" />
+                Start Your Project <ArrowUpRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
           </div>
@@ -143,5 +127,5 @@ export default function ServicesPage() {
 
       <Footer />
     </div>
-  )
+  );
 }

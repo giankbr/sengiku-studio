@@ -1,36 +1,28 @@
-"use client"
+'use client';
 
-import { useEffect, useRef } from "react"
-import { gsap } from "gsap"
-import { ArrowRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
+import { Button } from '@/components/ui/button';
+import { gsap } from 'gsap';
+import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+import { useEffect, useRef } from 'react';
 
 export default function HeroSection() {
-  const sectionRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Animate hero elements
-      gsap.fromTo(
-        ".hero-title",
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 1, delay: 0.2, ease: "power3.out" },
-      )
+      gsap.fromTo('.hero-title', { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1, delay: 0.2, ease: 'power3.out' });
 
-      gsap.fromTo(".hero-subtitle", { opacity: 0 }, { opacity: 1, duration: 1, delay: 0.6, ease: "power3.out" })
+      gsap.fromTo('.hero-subtitle', { opacity: 0 }, { opacity: 1, duration: 1, delay: 0.6, ease: 'power3.out' });
 
-      gsap.fromTo(
-        ".hero-cta",
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.8, delay: 0.8, ease: "power2.out" },
-      )
+      gsap.fromTo('.hero-cta', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.8, ease: 'power2.out' });
 
-      gsap.fromTo(".hero-social", { opacity: 0 }, { opacity: 1, duration: 0.8, delay: 1, ease: "power2.out" })
-    }, sectionRef)
+      gsap.fromTo('.hero-social', { opacity: 0 }, { opacity: 1, duration: 0.8, delay: 1, ease: 'power2.out' });
+    }, sectionRef);
 
-    return () => ctx.revert()
-  }, [])
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section ref={sectionRef} className="min-h-screen flex items-center pt-20 pb-10 border-b border-border">
@@ -44,8 +36,7 @@ export default function HeroSection() {
             </h1>
 
             <p className="hero-subtitle text-lg md:text-xl text-muted-foreground mt-6 max-w-2xl mx-auto md:mx-0">
-              Unlock the full potential of your brand with our creative design solutions. We transform ideas into
-              impactful experiences that captivate and connect.
+              Unlock the full potential of your brand with our creative design solutions. We transform ideas into impactful experiences that captivate and connect.
             </p>
 
             <div className="hero-cta flex flex-col md:flex-row items-center gap-4 mt-8 justify-center md:justify-start">
@@ -85,29 +76,22 @@ export default function HeroSection() {
             </a>
             <span className="hidden md:inline">/</span>
             <a href="#" className="hover:text-foreground transition-colors">
-              Careers
-            </a>
-            <span className="hidden md:inline">/</span>
-            <a href="#" className="hover:text-foreground transition-colors">
               Blogs
             </a>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 function SocialButton({ label, icon }: { label?: string; icon?: string }) {
   return (
-    <a
-      href="#"
-      className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-muted transition-colors"
-    >
+    <a href="#" className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-muted transition-colors">
       {label && <span className="font-medium">{label}</span>}
-      {icon === "dribbble" && <span className="text-lg">◎</span>}
-      {icon === "twitter" && <span className="text-lg">𝕏</span>}
-      {icon === "instagram" && <span className="text-lg">◼</span>}
+      {icon === 'dribbble' && <span className="text-lg">◎</span>}
+      {icon === 'twitter' && <span className="text-lg">𝕏</span>}
+      {icon === 'instagram' && <span className="text-lg">◼</span>}
     </a>
-  )
+  );
 }
