@@ -17,15 +17,15 @@ const teamMembers = [
     image: '/placeholder.svg?height=400&width=400',
   },
   {
-    name: 'Anindita Wijaya',
+    name: 'Gianlagi Wijaya',
     role: 'Lead Frontend Developer',
-    bio: 'Anindita specializes in creating responsive, accessible interfaces with modern frameworks like React, Vue, and Angular.',
+    bio: 'Gianlagi specializes in creating responsive, accessible interfaces with modern frameworks like React, Vue, and Angular.',
     image: '/placeholder.svg?height=400&width=400',
   },
   {
-    name: 'Budi Santoso',
+    name: 'Gianan Santoso',
     role: 'Senior Backend Developer',
-    bio: 'Budi architects robust backend systems with expertise in Node.js, Python, and database optimization.',
+    bio: 'Gianan architects robust backend systems with expertise in Node.js, Python, and database optimization.',
     image: '/placeholder.svg?height=400&width=400',
   },
   {
@@ -35,9 +35,9 @@ const teamMembers = [
     image: '/placeholder.svg?height=400&width=400',
   },
   {
-    name: 'Dian Permata',
+    name: 'Giandry Permata',
     role: 'UI/UX Developer',
-    bio: 'Dian bridges design and development, implementing responsive interfaces with meticulous attention to user experience.',
+    bio: 'Giandry bridges design and development, implementing responsive interfaces with meticulous attention to user experience.',
     image: '/placeholder.svg?height=400&width=400',
   },
   {
