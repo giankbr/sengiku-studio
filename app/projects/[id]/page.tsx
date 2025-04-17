@@ -268,17 +268,17 @@ export default function ProjectDetailPage() {
           </div>
 
           {/* CTA */}
-          <div className="fade-in mt-20 py-12 px-8 bg-muted dark:bg-zinc-900 rounded-lg text-center max-w-3xl mx-auto">
-            <h3 className="text-2xl font-bold mb-4">Interested in working with us?</h3>
-            <p className="text-muted-foreground mb-6">Let's discuss how we can help bring your project to life with our creative expertise.</p>
-            <div className="flex justify-center gap-4">
-              <Link href="/contact">
-                <Button className="rounded-full px-8">
+          <div className="fade-in mt-16 md:mt-20 py-8 md:py-12 px-4 md:px-8 bg-muted dark:bg-zinc-900 rounded-lg text-center max-w-3xl mx-auto">
+            <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">Interested in working with us?</h3>
+            <p className="text-sm md:text-base text-muted-foreground mb-6">Let's discuss how we can help bring your project to life with our development expertise.</p>
+            <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4">
+              <Link href="/contact" className="w-full sm:w-auto">
+                <Button className="rounded-full px-6 md:px-8 w-full sm:w-auto">
                   Contact Us <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
-              <Link href="/projects">
-                <Button variant="outline" className="rounded-full px-8">
+              <Link href="/projects" className="w-full sm:w-auto">
+                <Button variant="outline" className="rounded-full px-6 md:px-8 w-full sm:w-auto mt-2 sm:mt-0">
                   View All Projects <ExternalLink className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
