@@ -8,14 +8,14 @@ import { ArrowRight, Check } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
-// Define pricing plans
+// Define pricing plans with realistic IDR pricing
 const plans = [
   {
     name: 'Starter',
     description: 'Perfect for small businesses and personal websites',
     price: {
-      monthly: 1499,
-      yearly: 14990,
+      monthly: 8000000, // 8 juta per bulan
+      yearly: 86400000, // 86.4 juta per tahun (10% discount)
     },
     features: ['Responsive website (up to 5 pages)', 'Mobile optimization', 'Basic SEO setup', 'Contact form integration', '3 rounds of revisions', '1 month of support'],
     cta: 'Get Started',
@@ -25,8 +25,8 @@ const plans = [
     name: 'Business',
     description: 'Comprehensive solution for growing businesses',
     price: {
-      monthly: 2999,
-      yearly: 29990,
+      monthly: 15000000, // 15 juta per bulan
+      yearly: 162000000, // 162 juta per tahun (10% discount)
     },
     features: [
       'Responsive website (up to 10 pages)',
@@ -45,8 +45,8 @@ const plans = [
     name: 'Enterprise',
     description: 'Custom development for complex requirements',
     price: {
-      monthly: 5999,
-      yearly: 59990,
+      monthly: 30000000, // 30 juta per bulan
+      yearly: 324000000, // 324 juta per tahun (10% discount)
     },
     features: [
       'Fully custom website development',
@@ -132,14 +132,14 @@ export default function PricingSection() {
     return () => ctx.revert();
   }, []);
 
-  // Format price with comma for thousands
+  // Format price in Indonesian Rupiah
   const formatPrice = (price: number) => {
-    return (price / 1000).toLocaleString('en-US', {
+    return new Intl.NumberFormat('id-ID', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'IDR',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
-    });
+    }).format(price);
   };
 
   return (
@@ -165,7 +165,7 @@ export default function PricingSection() {
               className={cn('px-6 py-2 rounded-full text-sm transition-all', billingCycle === 'yearly' ? 'bg-primary text-primary-foreground shadow-sm' : 'hover:text-foreground')}
               onClick={() => setBillingCycle('yearly')}
             >
-              Yearly <span className="text-xs opacity-75 ml-1">Save 20%</span>
+              Yearly <span className="text-xs opacity-75 ml-1">Save 10%</span>
             </button>
           </div>
         </div>
@@ -191,9 +191,9 @@ export default function PricingSection() {
               <div className="mb-6">
                 <div className="flex items-end mb-1">
                   <span className="text-4xl font-bold">{formatPrice(billingCycle === 'monthly' ? plan.price.monthly : plan.price.yearly)}</span>
-                  {billingCycle === 'monthly' ? <span className="text-muted-foreground ml-2 mb-1">/ month</span> : <span className="text-muted-foreground ml-2 mb-1">/ year</span>}
                 </div>
-                {billingCycle === 'yearly' && <p className="text-primary text-sm">{formatPrice(plan.price.monthly)} monthly value</p>}
+                <p className="text-muted-foreground text-sm">{billingCycle === 'monthly' ? 'per month' : 'per year'}</p>
+                {billingCycle === 'yearly' && <p className="text-primary text-sm mt-2">You save {formatPrice(plan.price.monthly * 12 - plan.price.yearly)}</p>}
               </div>
 
               <ul className="space-y-3 mb-8 flex-grow">
