@@ -1,12 +1,12 @@
 import { ThemeProvider } from '@/components/theme-provider';
 import type { Metadata } from 'next';
-import { Sora } from 'next/font/google';
+import { Outfit } from 'next/font/google';
 import type React from 'react';
 import './globals.css';
 
-const sora = Sora({
+const outfit = Outfit({
   subsets: ['latin'],
-  variable: '--font-sora',
+  variable: '--font-outfit',
 });
 
 export const metadata: Metadata = {
@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${sora.variable} font-sans`}>
+      <body className={`${outfit.variable} font-sans`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           {children}
         </ThemeProvider>

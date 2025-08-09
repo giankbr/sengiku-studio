@@ -3,7 +3,7 @@
 import Footer from '@/components/footer';
 import Navbar from '@/components/navbar';
 import { Button } from '@/components/ui/button';
-import { gsap } from 'gsap';
+// Lazy-load GSAP on client to avoid SSR issues
 import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
@@ -168,27 +168,36 @@ export default function ServiceDetailPage() {
   useEffect(() => {
     if (shouldAnimate.current) {
       shouldAnimate.current = false;
-      const ctx = gsap.context(() => {
-        // Animate page elements
-        gsap.fromTo('.fade-in', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power2.out' });
+      let ctx: any;
+      let isMounted = true;
+      (async () => {
+        const { gsap } = await import('gsap');
+        if (!isMounted) return;
+        ctx = gsap.context(() => {
+          // Animate page elements
+          gsap.fromTo('.fade-in', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power2.out' });
 
-        // Animate portfolio items
-        gsap.utils.toArray('.portfolio-item').forEach((item: any, i) => {
-          gsap.fromTo(
-            item,
-            { opacity: 0, y: 20 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.6,
-              delay: 0.4 + i * 0.1,
-              ease: 'power2.out',
-            }
-          );
-        });
-      }, pageRef);
+          // Animate portfolio items
+          gsap.utils.toArray('.portfolio-item').forEach((item: any, i) => {
+            gsap.fromTo(
+              item,
+              { opacity: 0, y: 20 },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                delay: 0.4 + i * 0.1,
+                ease: 'power2.out',
+              }
+            );
+          });
+        }, pageRef);
+      })();
 
-      return () => ctx.revert();
+      return () => {
+        isMounted = false;
+        if (ctx) ctx.revert();
+      };
     }
   }, []);
 

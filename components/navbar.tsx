@@ -2,8 +2,9 @@
 
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
+import { Sheet, SheetClose, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
-import { Menu, X } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -17,7 +18,6 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
@@ -38,72 +38,69 @@ export default function Navbar() {
     };
   }, []);
 
-  // Handle body scroll lock when menu is open
-  useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isMenuOpen]);
-
   return (
     <>
-      <nav className={cn('fixed top-0 left-0 w-full z-40 transition-all duration-300', scrolled ? 'bg-background/90 backdrop-blur-md py-3 shadow-md' : 'bg-transparent py-5')}>
-        <div className="container mx-auto px-4 flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold">
+      <nav
+        className={cn('fixed inset-x-0 top-0 z-50 transition-all duration-300', scrolled ? 'bg-background/80 supports-[backdrop-filter]:bg-background/70 backdrop-blur border-b' : 'bg-transparent')}
+      >
+        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+          {/* Brand */}
+          <Link href="/" className="text-xl md:text-2xl font-bold tracking-tight">
             Sengiku Studio
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <Link key={link.name} href={link.href} className={cn('text-sm hover:text-primary transition-colors', pathname === link.href && 'font-medium text-primary')}>
-                {link.name}
-              </Link>
-            ))}
+          <div className="hidden md:flex items-center gap-6">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link key={link.name} href={link.href} className={cn('relative text-sm text-muted-foreground hover:text-foreground transition-colors', isActive && 'text-foreground')}>
+                  <span>{link.name}</span>
+                  <span className={cn('absolute left-0 -bottom-1 h-[2px] w-full origin-left scale-x-0 bg-primary transition-transform duration-300', isActive && 'scale-x-100')} />
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Desktop Actions */}
+          <div className="hidden md:flex items-center gap-3">
             <Link href="/contact">
-              <Button className="rounded-full px-6">Contact Us</Button>
+              <Button className="rounded-full px-5">Contact</Button>
             </Link>
             <ThemeToggle />
           </div>
 
-          {/* Mobile Control Area */}
-          <div className="flex items-center md:hidden space-x-2">
+          {/* Mobile Actions */}
+          <div className="flex md:hidden items-center gap-2">
             <ThemeToggle />
-            <button className="p-2 text-foreground" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}>
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="outline" className="rounded-full px-3 py-2">
+                  <Menu className="h-5 w-5" />
+                  <span className="sr-only">Open menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-full sm:max-w-sm">
+                <div className="mt-8 flex flex-col gap-4">
+                  {navLinks.map((link) => (
+                    <SheetClose asChild key={link.name}>
+                      <Link href={link.href} className={cn('text-lg py-2 text-muted-foreground hover:text-foreground transition-colors', pathname === link.href && 'text-foreground')}>
+                        {link.name}
+                      </Link>
+                    </SheetClose>
+                  ))}
+
+                  <SheetClose asChild>
+                    <Link href="/contact">
+                      <Button className="rounded-full w-full mt-4 py-6 text-base">Contact Us</Button>
+                    </Link>
+                  </SheetClose>
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </nav>
-
-      {/* Mobile Menu Overlay */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 bg-background/95 backdrop-blur-md z-30 md:hidden pt-20">
-          <div className="container mx-auto px-4 py-8">
-            <div className="flex flex-col space-y-6">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className={cn('text-2xl font-medium py-3 hover:text-primary transition-colors', pathname === link.href && 'text-primary')}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {link.name}
-                </Link>
-              ))}
-              <Link href="/contact" onClick={() => setIsMenuOpen(false)}>
-                <Button className="rounded-full w-full mt-4 py-6 text-lg">Contact Us</Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 }

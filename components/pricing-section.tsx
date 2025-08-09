@@ -132,14 +132,13 @@ export default function PricingSection() {
     return () => ctx.revert();
   }, []);
 
-  // Format price in Indonesian Rupiah
+  // Deterministic IDR formatter to avoid SSR/CSR Intl differences
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('id-ID', {
-      style: 'currency',
-      currency: 'IDR',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(price);
+    const absolute = Math.floor(Math.abs(price));
+    const digits = absolute.toString();
+    const withThousandsSeparators = digits.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    const formatted = `Rp ${withThousandsSeparators}`;
+    return price < 0 ? `- ${formatted}` : formatted;
   };
 
   return (
@@ -190,10 +189,16 @@ export default function PricingSection() {
 
               <div className="mb-6">
                 <div className="flex items-end mb-1">
-                  <span className="text-4xl font-bold">{formatPrice(billingCycle === 'monthly' ? plan.price.monthly : plan.price.yearly)}</span>
+                  <span suppressHydrationWarning className="text-4xl font-bold">
+                    {formatPrice(billingCycle === 'monthly' ? plan.price.monthly : plan.price.yearly)}
+                  </span>
                 </div>
                 <p className="text-muted-foreground text-sm">{billingCycle === 'monthly' ? 'per month' : 'per year'}</p>
-                {billingCycle === 'yearly' && <p className="text-primary text-sm mt-2">You save {formatPrice(plan.price.monthly * 12 - plan.price.yearly)}</p>}
+                {billingCycle === 'yearly' && (
+                  <p suppressHydrationWarning className="text-primary text-sm mt-2">
+                    You save {formatPrice(plan.price.monthly * 12 - plan.price.yearly)}
+                  </p>
+                )}
               </div>
 
               <ul className="space-y-3 mb-8 flex-grow">

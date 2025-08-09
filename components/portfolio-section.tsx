@@ -1,65 +1,65 @@
-"use client"
+'use client';
 
-import { useEffect, useRef, useState } from "react"
-import { gsap } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { ArrowUpRight, Plus } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Button } from '@/components/ui/button';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ArrowUpRight, Plus } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 
 const portfolioItems = [
   {
-    title: "PETSHOP",
-    category: "Mobile App Design",
-    image: "/placeholder.svg?height=600&width=400",
-    year: "2024",
+    title: 'PETSHOP',
+    category: 'Mobile App Design',
+    image: '/placeholder.svg?height=600&width=400',
+    year: '2024',
   },
   {
-    title: "ARTECO",
-    category: "Brand Identity",
-    image: "/placeholder.svg?height=600&width=400",
-    year: "2023",
+    title: 'ARTECO',
+    category: 'Brand Identity',
+    image: '/placeholder.svg?height=600&width=400',
+    year: '2023',
   },
   {
-    title: "NOMAD",
-    category: "Web Design",
-    image: "/placeholder.svg?height=600&width=400",
-    year: "2024",
+    title: 'NOMAD',
+    category: 'Web Design',
+    image: '/placeholder.svg?height=600&width=400',
+    year: '2024',
   },
   {
-    title: "LUMINA",
-    category: "UI/UX Design",
-    image: "/placeholder.svg?height=600&width=400",
-    year: "2023",
+    title: 'LUMINA',
+    category: 'UI/UX Design',
+    image: '/placeholder.svg?height=600&width=400',
+    year: '2023',
   },
-]
+];
 
 export default function PortfolioSection() {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const [hoveredItem, setHoveredItem] = useState<number | null>(null)
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [hoveredItem, setHoveredItem] = useState<number | null>(null);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger)
+    gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
       // Animate section title
       gsap.fromTo(
-        ".portfolio-title",
+        '.portfolio-title',
         { opacity: 0, y: 30 },
         {
           opacity: 1,
           y: 0,
           duration: 0.8,
           scrollTrigger: {
-            trigger: ".portfolio-title",
-            start: "top 80%",
-            end: "bottom 20%",
-            toggleActions: "play none none reverse",
+            trigger: '.portfolio-title',
+            start: 'top 80%',
+            end: 'bottom 20%',
+            toggleActions: 'play none none reverse',
           },
-        },
-      )
+        }
+      );
 
       // Animate portfolio items
-      gsap.utils.toArray(".portfolio-item").forEach((item: any, i) => {
+      gsap.utils.toArray('.portfolio-item').forEach((item: any, i) => {
         gsap.fromTo(
           item,
           { opacity: 0, y: 30 },
@@ -70,20 +70,20 @@ export default function PortfolioSection() {
             delay: i * 0.15,
             scrollTrigger: {
               trigger: item,
-              start: "top 85%",
-              end: "bottom 20%",
-              toggleActions: "play none none reverse",
+              start: 'top 85%',
+              end: 'bottom 20%',
+              toggleActions: 'play none none reverse',
             },
-          },
-        )
-      })
-    }, sectionRef)
+          }
+        );
+      });
+    }, sectionRef);
 
-    return () => ctx.revert()
-  }, [])
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section ref={sectionRef} id="portfolio" className="py-20 bg-background dark:bg-black">
+    <section ref={sectionRef} id="portfolio" className="py-20 bg-background">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-12">
           <h2 className="portfolio-title text-4xl md:text-5xl lg:text-6xl font-bold flex items-center">
@@ -96,23 +96,12 @@ export default function PortfolioSection() {
 
         <div className="grid md:grid-cols-2 gap-8">
           {portfolioItems.map((item, index) => (
-            <div
-              key={index}
-              className="portfolio-item relative overflow-hidden rounded-lg group"
-              onMouseEnter={() => setHoveredItem(index)}
-              onMouseLeave={() => setHoveredItem(null)}
-            >
+            <div key={index} className="portfolio-item relative overflow-hidden rounded-lg group" onMouseEnter={() => setHoveredItem(index)} onMouseLeave={() => setHoveredItem(null)}>
               <div className="relative aspect-[4/5] overflow-hidden">
-                <img
-                  src={item.image || "/placeholder.svg"}
-                  alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
+                <img src={item.image || '/placeholder.svg'} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
 
                 {/* Overlay that appears on hover */}
-                <div
-                  className={`absolute inset-0 bg-black/60 flex items-center justify-center transition-opacity duration-300 ${hoveredItem === index ? "opacity-100" : "opacity-0"}`}
-                >
+                <div className={`absolute inset-0 bg-black/60 flex items-center justify-center transition-opacity duration-300 ${hoveredItem === index ? 'opacity-100' : 'opacity-0'}`}>
                   <div className="text-center text-white p-6">
                     <div className="w-12 h-12 rounded-full border-2 border-white flex items-center justify-center mx-auto mb-4">
                       <Plus className="h-6 w-6" />
@@ -142,5 +131,5 @@ export default function PortfolioSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

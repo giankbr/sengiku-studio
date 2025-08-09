@@ -3,8 +3,8 @@
 import Footer from '@/components/footer';
 import Navbar from '@/components/navbar';
 import { Button } from '@/components/ui/button';
-import { gsap } from 'gsap';
-import { ArrowUpRight, Plus } from 'lucide-react';
+
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
@@ -99,31 +99,40 @@ export default function ProjectsPage() {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Animate page title
-      gsap.fromTo('.page-title', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.2, ease: 'power2.out' });
+    let ctx: any;
+    let isMounted = true;
+    (async () => {
+      const { gsap } = await import('gsap');
+      if (!isMounted) return;
+      ctx = gsap.context(() => {
+        // Animate page title
+        gsap.fromTo('.page-title', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.2, ease: 'power2.out' });
 
-      // Animate project items
-      gsap.utils.toArray('.project-card').forEach((card: any, i) => {
-        gsap.fromTo(
-          card,
-          { opacity: 0, y: 30 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            delay: 0.2 + i * 0.1,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: card,
-              start: 'top 85%',
-            },
-          }
-        );
-      });
-    }, pageRef);
+        // Animate project items
+        gsap.utils.toArray('.project-card').forEach((card: any, i) => {
+          gsap.fromTo(
+            card,
+            { opacity: 0, y: 30 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              delay: 0.2 + i * 0.1,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: card,
+                start: 'top 85%',
+              },
+            }
+          );
+        });
+      }, pageRef);
+    })();
 
-    return () => ctx.revert();
+    return () => {
+      isMounted = false;
+      if (ctx) ctx.revert();
+    };
   }, []);
 
   // Filter projects based on category
@@ -135,11 +144,12 @@ export default function ProjectsPage() {
 
       <main className="pt-24 pb-20">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto mb-16 text-center">
-            <h1 className="page-title text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Our <span className="italic font-normal">Work</span>
+          {/* Hero */}
+          <div className="max-w-4xl mx-auto mb-12 text-center">
+            <h1 className="page-title text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-5">
+              Work that <span className="text-primary">solves problems</span>, builds brands, and <span className="text-primary">drives growth</span>.
             </h1>
-            <p className="text-lg text-muted-foreground">Explore our portfolio of projects across various disciplines, from web design to branding and illustration.</p>
+            <p className="text-base md:text-lg text-muted-foreground">A curated selection of recent projects across product, web, and brand. Filter by category to explore specific work.</p>
           </div>
 
           {/* Filter Categories */}
@@ -151,34 +161,35 @@ export default function ProjectsPage() {
             ))}
           </div>
 
-          {/* Featured Projects */}
+          {/* Showcase */}
           {activeCategory === 'All' && (
-            <div className="mb-20">
-              <h2 className="text-2xl font-bold mb-8">Featured Projects</h2>
+            <div className="mb-16">
+              <h2 className="text-2xl font-bold mb-6">
+                Project <span className="text-primary">Showcase</span>
+              </h2>
               <div className="grid md:grid-cols-2 gap-8">
                 {projects
                   .filter((project) => project.featured)
                   .map((project, index) => (
                     <Link href={`/projects/${project.id}`} key={project.id} className="project-card group">
-                      <div className="relative aspect-[4/5] overflow-hidden rounded-lg" onMouseEnter={() => setHoveredProject(index)} onMouseLeave={() => setHoveredProject(null)}>
+                      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border bg-card" onMouseEnter={() => setHoveredProject(index)} onMouseLeave={() => setHoveredProject(null)}>
                         <img src={project.image || '/placeholder.svg'} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
 
-                        {/* Overlay that appears on hover */}
-                        <div className={`absolute inset-0 bg-black/60 flex items-center justify-center transition-opacity duration-300 ${hoveredProject === index ? 'opacity-100' : 'opacity-0'}`}>
-                          <div className="text-center text-white p-6">
-                            <div className="w-12 h-12 rounded-full border-2 border-white flex items-center justify-center mx-auto mb-4">
-                              <Plus className="h-6 w-6" />
-                            </div>
-                            <h3 className="text-2xl md:text-3xl font-bold mb-2">{project.title}</h3>
-                            <p className="text-sm opacity-80">{project.category}</p>
-                          </div>
+                        {/* Overlay tags + arrow */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <div className="absolute left-4 bottom-4 flex gap-2">
+                          <span className="px-2 py-1 text-[11px] rounded-full bg-white/90 text-black">{project.category}</span>
+                          <span className="px-2 py-1 text-[11px] rounded-full bg-white/60 text-black">{project.year}</span>
+                        </div>
+                        <div className="absolute right-4 bottom-4 w-10 h-10 rounded-full bg-white/90 text-black flex items-center justify-center translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all">
+                          <ArrowRight className="h-5 w-5" />
                         </div>
                       </div>
 
-                      {/* Info below image */}
-                      <div className="flex justify-between items-center mt-4 px-2">
+                      {/* Info */}
+                      <div className="flex justify-between items-center mt-4 px-1">
                         <div>
-                          <h3 className="text-xl font-bold">{project.title}</h3>
+                          <h3 className="text-xl font-bold tracking-tight">{project.title}</h3>
                           <p className="text-sm text-muted-foreground">{project.category}</p>
                         </div>
                         <span className="text-sm text-muted-foreground">{project.year}</span>
@@ -191,33 +202,36 @@ export default function ProjectsPage() {
 
           {/* All Projects */}
           <div>
-            <h2 className="text-2xl font-bold mb-8">{activeCategory === 'All' ? 'All Projects' : activeCategory}</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <h2 className="text-2xl font-bold mb-6">{activeCategory === 'All' ? 'All Projects' : activeCategory}</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {filteredProjects.map((project, index) => (
                 <Link href={`/projects/${project.id}`} key={project.id} className="project-card group">
                   <div
-                    className="relative aspect-square overflow-hidden rounded-lg"
+                    className="relative aspect-square overflow-hidden rounded-2xl border bg-card"
                     onMouseEnter={() => setHoveredProject(index + 100)} // Offset to avoid conflict with featured projects
                     onMouseLeave={() => setHoveredProject(null)}
                   >
                     <img src={project.image || '/placeholder.svg'} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
 
-                    {/* Overlay that appears on hover */}
-                    <div className={`absolute inset-0 bg-black/60 flex items-center justify-center transition-opacity duration-300 ${hoveredProject === index + 100 ? 'opacity-100' : 'opacity-0'}`}>
-                      <div className="text-center text-white p-6">
-                        <div className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center mx-auto mb-3">
-                          <Plus className="h-5 w-5" />
-                        </div>
-                        <h3 className="text-xl font-bold mb-1">{project.title}</h3>
-                        <p className="text-xs opacity-80">{project.category}</p>
-                      </div>
+                    {/* Overlay tags + arrow */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute left-3 bottom-3 flex gap-2">
+                      <span className="px-2 py-1 text-[11px] rounded-full bg-white/90 text-black">{project.category}</span>
+                      <span className="px-2 py-1 text-[11px] rounded-full bg-white/60 text-black">{project.year}</span>
+                    </div>
+                    <div
+                      className={`absolute right-3 bottom-3 w-9 h-9 rounded-full bg-white/90 text-black flex items-center justify-center transition-all ${
+                        hoveredProject === index + 100 ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'
+                      }`}
+                    >
+                      <ArrowRight className="h-4 w-4" />
                     </div>
                   </div>
 
                   {/* Info below image */}
-                  <div className="flex justify-between items-center mt-4 px-2">
+                  <div className="flex justify-between items-center mt-3 px-1">
                     <div>
-                      <h3 className="text-lg font-bold">{project.title}</h3>
+                      <h3 className="text-lg font-bold tracking-tight">{project.title}</h3>
                       <p className="text-xs text-muted-foreground">{project.category}</p>
                     </div>
                     <span className="text-xs text-muted-foreground">{project.year}</span>

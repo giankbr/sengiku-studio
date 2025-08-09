@@ -4,7 +4,7 @@ import Footer from '@/components/footer';
 import Navbar from '@/components/navbar';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { gsap } from 'gsap';
+// Lazy-load GSAP on client to avoid SSR issues
 import { ArrowLeft, Calendar, Clock, Share2, User } from 'lucide-react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
@@ -244,31 +244,40 @@ export default function BlogDetailPage() {
   }
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    let ctx: any;
+    let isMounted = true;
+    (async () => {
+      const { gsap } = await import('gsap');
       // Animate page elements
-      gsap.fromTo('.fade-in', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power2.out' });
+      if (!isMounted) return;
+      ctx = gsap.context(() => {
+        gsap.fromTo('.fade-in', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power2.out' });
 
-      // Animate related posts
-      gsap.utils.toArray('.related-post').forEach((item: any, i) => {
-        gsap.fromTo(
-          item,
-          { opacity: 0, y: 20 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            delay: 0.3 + i * 0.1,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: item,
-              start: 'top 85%',
-            },
-          }
-        );
-      });
-    }, pageRef);
+        // Animate related posts
+        gsap.utils.toArray('.related-post').forEach((item: any, i) => {
+          gsap.fromTo(
+            item,
+            { opacity: 0, y: 20 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              delay: 0.3 + i * 0.1,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: item,
+                start: 'top 85%',
+              },
+            }
+          );
+        });
+      }, pageRef);
+    })();
 
-    return () => ctx.revert();
+    return () => {
+      isMounted = false;
+      if (ctx) ctx.revert();
+    };
   }, []);
 
   // Get related posts data

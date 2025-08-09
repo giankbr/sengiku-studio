@@ -2,8 +2,9 @@
 
 import Footer from '@/components/footer';
 import Navbar from '@/components/navbar';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { gsap } from 'gsap';
+// Lazy-load GSAP on client to avoid SSR issues
 import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
@@ -133,9 +134,12 @@ export default function ProjectDetailPage() {
   }
 
   useEffect(() => {
-    let ctx: gsap.Context;
-
-    if (pageRef.current) {
+    let ctx: any;
+    let isMounted = true;
+    (async () => {
+      const { gsap } = await import('gsap');
+      const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+      if (!isMounted || !pageRef.current) return;
       ctx = gsap.context(() => {
         // Animate page elements
         gsap.fromTo('.fade-in', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power2.out' });
@@ -159,13 +163,11 @@ export default function ProjectDetailPage() {
           );
         });
       }, pageRef);
-
-      return () => {
-        if (ctx) {
-          ctx.revert();
-        }
-      };
-    }
+    })();
+    return () => {
+      isMounted = false;
+      if (ctx) ctx.revert();
+    };
   }, [project]);
 
   return (
@@ -180,52 +182,68 @@ export default function ProjectDetailPage() {
           </Link>
 
           {/* Project Header */}
-          <div className="max-w-4xl mx-auto mb-12">
-            <div className="fade-in mb-4">
-              <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">{project.category}</span>
-            </div>
-            <h1 className="fade-in text-4xl md:text-5xl lg:text-6xl font-bold mb-6">{project.title}</h1>
-            <p className="fade-in text-xl text-muted-foreground mb-8">{project.description}</p>
+          <div className="mb-10 md:mb-12">
+            <div className="grid md:grid-cols-12 gap-8 items-start">
+              {/* Left: Title + description */}
+              <div className="md:col-span-8">
+                <div className="fade-in mb-4">
+                  <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">{project.category}</span>
+                </div>
+                <h1 className="fade-in text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-5">{project.title}</h1>
+                <p className="fade-in text-lg md:text-xl text-muted-foreground">{project.description}</p>
+              </div>
 
-            <div className="fade-in grid grid-cols-2 md:grid-cols-4 gap-6 mt-8">
-              <div>
-                <h3 className="text-sm font-medium text-muted-foreground mb-1">Client</h3>
-                <p className="text-base">{project.client}</p>
-              </div>
-              <div>
-                <h3 className="text-sm font-medium text-muted-foreground mb-1">Year</h3>
-                <p className="text-base">{project.year}</p>
-              </div>
-              <div>
-                <h3 className="text-sm font-medium text-muted-foreground mb-1">Duration</h3>
-                <p className="text-base">{project.duration}</p>
-              </div>
-              <div>
-                <h3 className="text-sm font-medium text-muted-foreground mb-1">Services</h3>
-                <p className="text-base">{project.services.join(', ')}</p>
-              </div>
+              {/* Right: Meta card (sticky) */}
+              <aside className="md:col-span-4">
+                <div className="fade-in rounded-2xl border bg-card p-6 md:sticky md:top-28">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <h3 className="text-xs font-medium text-muted-foreground">Client</h3>
+                      <p className="text-sm mt-1">{project.client}</p>
+                    </div>
+                    <div>
+                      <h3 className="text-xs font-medium text-muted-foreground">Year</h3>
+                      <p className="text-sm mt-1">{project.year}</p>
+                    </div>
+                    <div>
+                      <h3 className="text-xs font-medium text-muted-foreground">Duration</h3>
+                      <p className="text-sm mt-1">{project.duration}</p>
+                    </div>
+                    <div className="col-span-2">
+                      <h3 className="text-xs font-medium text-muted-foreground">Services</h3>
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        {project.services.map((svc) => (
+                          <Badge key={svc} variant="secondary" className="rounded-full">
+                            {svc}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </aside>
             </div>
           </div>
 
           {/* Main Image */}
           <div className="fade-in mb-16">
-            <img src={project.mainImage || '/placeholder.svg'} alt={project.title} className="w-full rounded-lg" />
+            <img src={project.mainImage || '/placeholder.svg'} alt={project.title} className="w-full rounded-2xl border" />
           </div>
 
           {/* Project Details */}
           <div className="max-w-3xl mx-auto mb-16">
-            <div className="fade-in mb-12">
-              <h2 className="text-2xl font-bold mb-4">The Challenge</h2>
+            <div className="fade-in mb-6 rounded-2xl border bg-card p-6">
+              <h2 className="text-xl md:text-2xl font-bold mb-3">The Challenge</h2>
               <p className="text-muted-foreground">{project.challenge}</p>
             </div>
 
-            <div className="fade-in mb-12">
-              <h2 className="text-2xl font-bold mb-4">Our Solution</h2>
+            <div className="fade-in mb-6 rounded-2xl border bg-card p-6">
+              <h2 className="text-xl md:text-2xl font-bold mb-3">Our Solution</h2>
               <p className="text-muted-foreground">{project.solution}</p>
             </div>
 
-            <div className="fade-in">
-              <h2 className="text-2xl font-bold mb-4">The Outcome</h2>
+            <div className="fade-in rounded-2xl border bg-card p-6">
+              <h2 className="text-xl md:text-2xl font-bold mb-3">The Outcome</h2>
               <p className="text-muted-foreground">{project.outcome}</p>
             </div>
           </div>
@@ -235,7 +253,7 @@ export default function ProjectDetailPage() {
             <h2 className="fade-in text-2xl font-bold mb-8 text-center">Project Gallery</h2>
             <div className="grid md:grid-cols-2 gap-6">
               {project.gallery.map((image, index) => (
-                <div key={index} className="gallery-item overflow-hidden rounded-lg">
+                <div key={index} className="gallery-item overflow-hidden rounded-2xl border">
                   <img src={image || '/placeholder.svg'} alt={`${project.title} - Gallery ${index + 1}`} className="w-full" />
                 </div>
               ))}
@@ -244,7 +262,7 @@ export default function ProjectDetailPage() {
 
           {/* Testimonial */}
           {project.testimonial && (
-            <div className="fade-in max-w-3xl mx-auto mb-16 py-10 px-8 bg-muted dark:bg-zinc-900 rounded-lg">
+            <div className="fade-in max-w-3xl mx-auto mb-16 py-10 px-8 rounded-2xl border bg-card">
               <blockquote className="text-xl italic mb-6">"{project.testimonial.quote}"</blockquote>
               <div className="flex items-center">
                 <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
@@ -261,9 +279,9 @@ export default function ProjectDetailPage() {
           {/* Next Project */}
           <div className="fade-in max-w-3xl mx-auto text-center">
             <p className="text-sm text-muted-foreground mb-2">Next Project</p>
-            <Link href={`/projects/${project.nextProject}`} className="text-2xl font-bold hover:text-primary transition-colors inline-flex items-center">
-              {projectsData[project.nextProject as keyof typeof projectsData]?.title}
-              <ArrowRight className="ml-2 h-5 w-5" />
+            <Link href={`/projects/${project.nextProject}`} className="inline-flex items-center justify-center gap-2 rounded-full border px-5 py-3 hover:bg-accent transition-colors">
+              <span className="text-base font-semibold">{projectsData[project.nextProject as keyof typeof projectsData]?.title}</span>
+              <ArrowRight className="h-5 w-5" />
             </Link>
           </div>
 

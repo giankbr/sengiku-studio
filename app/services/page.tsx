@@ -3,7 +3,7 @@
 import Footer from '@/components/footer';
 import Navbar from '@/components/navbar';
 import { Button } from '@/components/ui/button';
-import { gsap } from 'gsap';
+// Lazy-load GSAP on client to avoid SSR issues
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
@@ -50,17 +50,25 @@ export default function ServicesPage() {
   const pageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Animate page title
-      gsap.fromTo('.page-title', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.2, ease: 'power2.out' });
+    let ctx: any;
+    let isMounted = true;
+    (async () => {
+      const { gsap } = await import('gsap');
+      if (!isMounted) return;
+      ctx = gsap.context(() => {
+        // Animate page title
+        gsap.fromTo('.page-title', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.2, ease: 'power2.out' });
 
-      // Animate service items
-      gsap.utils.toArray('.service-card').forEach((card: any, i) => {
-        gsap.fromTo(card, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.2 + i * 0.1, ease: 'power2.out' });
-      });
-    }, pageRef);
-
-    return () => ctx.revert();
+        // Animate service items
+        gsap.utils.toArray('.service-card').forEach((card: any, i) => {
+          gsap.fromTo(card, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.2 + i * 0.1, ease: 'power2.out' });
+        });
+      }, pageRef);
+    })();
+    return () => {
+      isMounted = false;
+      if (ctx) ctx.revert();
+    };
   }, []);
 
   return (

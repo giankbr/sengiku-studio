@@ -1,47 +1,47 @@
-"use client"
+'use client';
 
-import type React from "react"
+import type React from 'react';
 
-import { useEffect, useRef, useState } from "react"
-import { gsap } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { ArrowRight, Mail, MapPin, Phone, Clock } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ArrowRight, Clock, Mail, MapPin, Phone } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function ContactSection() {
-  const sectionRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  })
+    name: '',
+    email: '',
+    message: '',
+  });
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger)
+    gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
       // Animate section title
       gsap.fromTo(
-        ".contact-title",
+        '.contact-title',
         { opacity: 0, y: 30 },
         {
           opacity: 1,
           y: 0,
           duration: 0.8,
           scrollTrigger: {
-            trigger: ".contact-title",
-            start: "top 80%",
-            end: "bottom 20%",
-            toggleActions: "play none none reverse",
+            trigger: '.contact-title',
+            start: 'top 80%',
+            end: 'bottom 20%',
+            toggleActions: 'play none none reverse',
           },
-        },
-      )
+        }
+      );
 
       // Animate form elements
       gsap.fromTo(
-        ".contact-form",
+        '.contact-form',
         { opacity: 0, y: 30 },
         {
           opacity: 1,
@@ -49,17 +49,17 @@ export default function ContactSection() {
           duration: 0.8,
           delay: 0.2,
           scrollTrigger: {
-            trigger: ".contact-form",
-            start: "top 85%",
-            end: "bottom 20%",
-            toggleActions: "play none none reverse",
+            trigger: '.contact-form',
+            start: 'top 85%',
+            end: 'bottom 20%',
+            toggleActions: 'play none none reverse',
           },
-        },
-      )
+        }
+      );
 
       // Animate contact info
       gsap.fromTo(
-        ".contact-info",
+        '.contact-info',
         { opacity: 0, y: 30 },
         {
           opacity: 1,
@@ -67,40 +67,40 @@ export default function ContactSection() {
           duration: 0.8,
           delay: 0.4,
           scrollTrigger: {
-            trigger: ".contact-info",
-            start: "top 85%",
-            end: "bottom 20%",
-            toggleActions: "play none none reverse",
+            trigger: '.contact-info',
+            start: 'top 85%',
+            end: 'bottom 20%',
+            toggleActions: 'play none none reverse',
           },
-        },
-      )
-    }, sectionRef)
+        }
+      );
+    }, sectionRef);
 
-    return () => ctx.revert()
-  }, [])
+    return () => ctx.revert();
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Form submitted:", formData)
+    e.preventDefault();
+    console.log('Form submitted:', formData);
     // Here you would typically send the data to your backend
-    alert("Form submitted successfully!")
-    setFormData({ name: "", email: "", message: "" })
-  }
+    alert('Form submitted successfully!');
+    setFormData({ name: '', email: '', message: '' });
+  };
 
   return (
-    <section ref={sectionRef} id="contact" className="py-24 bg-muted dark:bg-zinc-900">
+    <section ref={sectionRef} id="contact" className="py-24 bg-muted">
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
           <h2 className="contact-title text-4xl md:text-5xl lg:text-6xl font-bold mb-12 text-center">
             Got a project? <span className="italic font-normal">Let's talk.</span>
           </h2>
 
-          <div className="bg-background dark:bg-black rounded-2xl shadow-lg overflow-hidden">
+          <div className="bg-card rounded-2xl shadow-lg overflow-hidden">
             <div className="grid md:grid-cols-2">
               {/* Contact Form */}
               <div className="contact-form p-8 md:p-12">
@@ -110,47 +110,21 @@ export default function ContactSection() {
                     <label htmlFor="name" className="block text-sm font-medium mb-2">
                       Name
                     </label>
-                    <Input
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      placeholder="What's your name?"
-                      required
-                      className="w-full"
-                    />
+                    <Input id="name" name="name" value={formData.name} onChange={handleChange} placeholder="What's your name?" required className="w-full" />
                   </div>
 
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium mb-2">
                       Email
                     </label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="your@email.com"
-                      required
-                      className="w-full"
-                    />
+                    <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} placeholder="your@email.com" required className="w-full" />
                   </div>
 
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium mb-2">
                       Message
                     </label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      placeholder="Tell us about your project..."
-                      rows={5}
-                      required
-                      className="w-full"
-                    />
+                    <Textarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="Tell us about your project..." rows={5} required className="w-full" />
                   </div>
 
                   <Button type="submit" className="rounded-full w-full">
@@ -160,11 +134,9 @@ export default function ContactSection() {
               </div>
 
               {/* Contact Information */}
-              <div className="contact-info bg-primary/5 dark:bg-primary/10 p-8 md:p-12">
+              <div className="contact-info bg-primary/10 p-8 md:p-12">
                 <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
-                <p className="text-muted-foreground mb-8">
-                  Feel free to reach out to us through any of these channels:
-                </p>
+                <p className="text-muted-foreground mb-8">Feel free to reach out to us through any of these channels:</p>
 
                 <div className="space-y-8">
                   <div className="flex items-start">
@@ -223,28 +195,16 @@ export default function ContactSection() {
                 <div className="mt-12 pt-8 border-t border-border">
                   <h4 className="text-sm font-medium mb-4">Follow Us</h4>
                   <div className="flex gap-4">
-                    <a
-                      href="#"
-                      className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary/10 transition-colors"
-                    >
+                    <a href="#" className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary/10 transition-colors">
                       <span className="font-medium">Be</span>
                     </a>
-                    <a
-                      href="#"
-                      className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary/10 transition-colors"
-                    >
+                    <a href="#" className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary/10 transition-colors">
                       <span className="text-lg">◎</span>
                     </a>
-                    <a
-                      href="#"
-                      className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary/10 transition-colors"
-                    >
+                    <a href="#" className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary/10 transition-colors">
                       <span className="text-lg">𝕏</span>
                     </a>
-                    <a
-                      href="#"
-                      className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary/10 transition-colors"
-                    >
+                    <a href="#" className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary/10 transition-colors">
                       <span className="text-lg">◼</span>
                     </a>
                   </div>
@@ -255,5 +215,5 @@ export default function ContactSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

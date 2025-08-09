@@ -25,7 +25,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="min-h-screen flex items-center pt-20 pb-10 border-b border-border">
+    <section ref={sectionRef} className="min-h-screen flex items-center pt-20 pb-10 border-b border-border bg-background">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center md:text-left mb-16">
