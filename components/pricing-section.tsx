@@ -8,14 +8,14 @@ import { ArrowRight, Check } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
-// Define pricing plans with realistic IDR pricing
+// Define pricing plans with USD pricing
 const plans = [
   {
     name: 'Starter',
     description: 'Perfect for small businesses and personal websites',
     price: {
-      monthly: 8000000, // 8 juta per bulan
-      yearly: 86400000, // 86.4 juta per tahun (10% discount)
+      monthly: 500, // $500 per month
+      yearly: 5400, // $5,400 per year (10% discount)
     },
     features: ['Responsive website (up to 5 pages)', 'Mobile optimization', 'Basic SEO setup', 'Contact form integration', '3 rounds of revisions', '1 month of support'],
     cta: 'Get Started',
@@ -25,8 +25,8 @@ const plans = [
     name: 'Business',
     description: 'Comprehensive solution for growing businesses',
     price: {
-      monthly: 15000000, // 15 juta per bulan
-      yearly: 162000000, // 162 juta per tahun (10% discount)
+      monthly: 1000, // $1,000 per month
+      yearly: 10800, // $10,800 per year (10% discount)
     },
     features: [
       'Responsive website (up to 10 pages)',
@@ -45,8 +45,8 @@ const plans = [
     name: 'Enterprise',
     description: 'Custom development for complex requirements',
     price: {
-      monthly: 30000000, // 30 juta per bulan
-      yearly: 324000000, // 324 juta per tahun (10% discount)
+      monthly: 2000, // $2,000 per month
+      yearly: 21600, // $21,600 per year (10% discount)
     },
     features: [
       'Fully custom website development',
@@ -132,12 +132,12 @@ export default function PricingSection() {
     return () => ctx.revert();
   }, []);
 
-  // Deterministic IDR formatter to avoid SSR/CSR Intl differences
+  // Deterministic USD formatter to avoid SSR/CSR Intl differences
   const formatPrice = (price: number) => {
     const absolute = Math.floor(Math.abs(price));
     const digits = absolute.toString();
-    const withThousandsSeparators = digits.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-    const formatted = `Rp ${withThousandsSeparators}`;
+    const withThousandsSeparators = digits.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    const formatted = `$${withThousandsSeparators}`;
     return price < 0 ? `- ${formatted}` : formatted;
   };
 
