@@ -83,27 +83,47 @@ export default function BlogSection() {
     return () => ctx.revert();
   }, []);
 
+  const featured = blogPosts[0];
+  const rest = blogPosts.slice(1);
+
   return (
     <section ref={sectionRef} className="section-pad bg-background">
       <div className="container mx-auto px-4">
-        <h2 className="blog-title section-header mb-3">
-          Blog <span className="italic font-normal">Hub</span>
-        </h2>
-        <p className="section-subtitle mb-10">Insights, stories, and practical notes from our day-to-day building digital products.</p>
+        <div className="mb-10">
+          <h2 className="blog-title section-header mb-3">
+            Blog <span className="italic font-normal">Hub</span>
+          </h2>
+          <p className="section-subtitle">Insights, stories, and practical notes from our day-to-day building digital products.</p>
+        </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogPosts.map((post, index) => (
-            <Link href="#" key={index} className="blog-post group panel overflow-hidden">
-              <div className="mb-4 overflow-hidden">
-                <img src={post.image || '/placeholder.svg'} alt={post.title} className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
-              </div>
-              <div className="space-y-2 px-6 pb-6">
-                <p className="text-sm text-muted-foreground">{post.date}</p>
-                <h3 className="text-xl font-bold group-hover:text-primary transition-colors">{post.title}</h3>
-                <p className="text-sm text-muted-foreground line-clamp-3">{post.excerpt}</p>
-              </div>
-            </Link>
-          ))}
+        <div className="grid lg:grid-cols-12 gap-8">
+          {/* Featured */}
+          <Link href="#" className="blog-post panel overflow-hidden lg:col-span-7 group">
+            <div className="aspect-[16/10] w-full overflow-hidden">
+              <img src={featured.image || '/placeholder.svg'} alt={featured.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            </div>
+            <div className="p-6">
+              <p className="text-sm text-muted-foreground mb-2">{featured.date}</p>
+              <h3 className="text-2xl md:text-3xl font-bold mb-2 group-hover:text-primary transition-colors">{featured.title}</h3>
+              <p className="text-muted-foreground line-clamp-3">{featured.excerpt}</p>
+            </div>
+          </Link>
+
+          {/* List */}
+          <div className="lg:col-span-5 space-y-4">
+            {rest.map((post, index) => (
+              <Link href="#" key={index} className="blog-post panel p-4 flex gap-4 items-start group">
+                <div className="w-32 shrink-0 overflow-hidden rounded-md">
+                  <img src={post.image || '/placeholder.svg'} alt={post.title} className="h-24 w-32 object-cover transition-transform duration-500 group-hover:scale-105" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-xs text-muted-foreground">{post.date}</p>
+                  <h3 className="text-lg font-semibold group-hover:text-primary transition-colors line-clamp-2">{post.title}</h3>
+                  <p className="text-sm text-muted-foreground line-clamp-2">{post.excerpt}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </section>

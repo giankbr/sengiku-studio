@@ -101,35 +101,61 @@ export default function FaqSection() {
   };
 
   return (
-    <section ref={sectionRef} id="faq" className="py-20 bg-background">
+    <section ref={sectionRef} id="faq" className="section-pad bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="faq-title text-4xl md:text-5xl font-bold mb-6">
-            Frequently Asked <span className="italic font-normal">Questions</span>
-          </h2>
-          <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">Find answers to common questions about our web development services, process, and technologies.</p>
-        </div>
-
-        <div className="max-w-3xl mx-auto">
-          {faqs.map((faq, index) => (
-            <div key={index} className="faq-item border-b border-border py-6">
-              <button className="w-full flex justify-between items-center text-left" onClick={() => toggleFaq(index)} aria-expanded={openIndex === index}>
-                <h3 className="text-lg md:text-xl font-medium">{faq.question}</h3>
-                <ChevronDown className={cn('h-5 w-5 text-muted-foreground transition-transform duration-200', openIndex === index && 'rotate-180')} />
-              </button>
-
-              <div className={cn('mt-2 overflow-hidden transition-all duration-300', openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0')}>
-                <p className="text-muted-foreground py-4">{faq.answer}</p>
+        <div className="faq-grid grid lg:grid-cols-12 gap-10">
+          {/* Left: sticky intro */}
+          <div className="lg:col-span-5">
+            <div className="sticky top-24">
+              <h2 className="faq-title section-header mb-3">
+                Frequently Asked <span className="italic font-normal">Questions</span>
+              </h2>
+              <p className="section-subtitle mb-8">Find clear answers to common topics like process, timelines, tech stack, and support.</p>
+              <div className="panel p-6">
+                <p className="text-sm text-muted-foreground">Need a direct answer?</p>
+                <div className="mt-3 flex gap-3">
+                  <Link href="/contact">
+                    <Button className="rounded-full">Talk to us</Button>
+                  </Link>
+                  <Link href="#pricing">
+                    <Button variant="outline" className="rounded-full">
+                      Pricing
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
 
-        <div className="text-center mt-12">
-          <p className="text-muted-foreground mb-6">Still have questions? We're here to help.</p>
-          <Link href="/contact">
-            <Button className="rounded-full px-6">Contact Us</Button>
-          </Link>
+          {/* Right: accordion list */}
+          <div className="lg:col-span-7">
+            <div className="space-y-4">
+              {faqs.map((faq, index) => {
+                const isOpen = openIndex === index;
+                const contentId = `faq-content-${index}`;
+                return (
+                  <div key={index} className="faq-item panel">
+                    <button className="w-full flex items-center justify-between text-left px-6 py-5" onClick={() => toggleFaq(index)} aria-expanded={isOpen} aria-controls={contentId}>
+                      <h3 className="text-base md:text-lg font-medium pr-6">{faq.question}</h3>
+                      <span className={cn('shrink-0 inline-flex h-8 w-8 items-center justify-center rounded-full border transition-colors', isOpen && 'bg-primary text-primary-foreground')}>
+                        <ChevronDown className={cn('h-4 w-4 transition-transform duration-200', isOpen && 'rotate-180')} />
+                      </span>
+                    </button>
+                    <div id={contentId} className={cn('overflow-hidden transition-all duration-300 px-6', isOpen ? 'max-h-96 pb-6' : 'max-h-0')}>
+                      <p className="text-muted-foreground pt-1">{faq.answer}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="text-center mt-10">
+              <p className="text-muted-foreground mb-6">Still have questions? We're here to help.</p>
+              <Link href="/contact">
+                <Button className="rounded-full px-6">Contact Us</Button>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </section>
