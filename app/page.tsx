@@ -58,7 +58,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main ref={mainRef} className="min-h-screen">
+    <main ref={mainRef} className="min-h-screen bg-page">
       <Navbar />
       <HeroSection />
       <ServicesSection />

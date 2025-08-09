@@ -25,23 +25,23 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="min-h-screen flex items-center pt-20 pb-10 border-b border-border bg-background">
+    <section ref={sectionRef} className="min-h-screen flex items-center pt-24 pb-16 border-b border-border bg-page">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center md:text-left mb-16">
-            <h1 className="hero-title text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
+          <div className="text-center md:text-left mb-14">
+            <h1 className="hero-title section-header mb-6">
               Break Out
               <br />
               The <span className="italic font-normal">Square Space.</span>
             </h1>
 
-            <p className="hero-subtitle text-lg md:text-xl text-muted-foreground mt-6 max-w-2xl mx-auto md:mx-0">
+            <p className="hero-subtitle text-lg md:text-xl text-muted-foreground mt-4 max-w-2xl mx-auto md:mx-0">
               Build fast, modern, and scalable websites that empower your brand online. We turn technical complexity into seamless digital experiences.
             </p>
 
             <div className="hero-cta flex flex-col md:flex-row items-center gap-4 mt-8 justify-center md:justify-start">
               <Link href="#contact">
-                <Button className="rounded-full px-6">Let's Talk</Button>
+                <Button className="rounded-full px-6 shadow-sm">Let's Talk</Button>
               </Link>
               <Link href="#portfolio">
                 <Button variant="outline" className="rounded-full px-6">

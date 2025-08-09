@@ -68,3 +68,33 @@
 :root {
   font-family: var(--font-outfit), sans-serif;
 }
+
+/* Page-level soft gradients and reusable surfaces */
+@layer utilities {
+  .bg-page {
+    background-image: radial-gradient(800px 320px at 50% -10%, hsl(var(--primary) / 0.06), transparent 60%),
+      radial-gradient(600px 240px at 85% 0%, hsl(var(--muted-foreground) / 0.06), transparent 60%), radial-gradient(600px 240px at 15% 10%, hsl(var(--muted-foreground) / 0.06), transparent 60%);
+    background-repeat: no-repeat;
+  }
+
+  .section-pad {
+    @apply py-24 md:py-28;
+  }
+
+  .section-header {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight;
+  }
+
+  .section-subtitle {
+    @apply text-lg md:text-xl text-muted-foreground max-w-2xl;
+  }
+
+  .panel {
+    @apply rounded-2xl border border-border/60 bg-card;
+    box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.5) inset, 0 60px 120px -60px rgba(0, 0, 0, 0.25);
+  }
+
+  .subtle-section-gradient {
+    background-image: linear-gradient(to bottom, transparent, hsl(var(--muted) / 0.35) 15%, transparent 85%);
+  }
+}

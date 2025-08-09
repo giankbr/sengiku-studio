@@ -83,12 +83,15 @@ export default function PortfolioSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="portfolio" className="py-20 bg-background">
+    <section ref={sectionRef} id="portfolio" className="section-pad bg-background">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center mb-12">
-          <h2 className="portfolio-title text-4xl md:text-5xl lg:text-6xl font-bold flex items-center">
-            Our <span className="italic ml-3 font-normal">Work</span>
-          </h2>
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
+          <div>
+            <h2 className="portfolio-title section-header flex items-center">
+              Our <span className="italic ml-3 font-normal">Work</span>
+            </h2>
+            <p className="section-subtitle mt-3">Selected projects and recent case studies from our studio.</p>
+          </div>
           <Button variant="outline" className="rounded-full hidden md:flex">
             View All Projects <ArrowUpRight className="ml-2 h-4 w-4" />
           </Button>
@@ -96,7 +99,7 @@ export default function PortfolioSection() {
 
         <div className="grid md:grid-cols-2 gap-8">
           {portfolioItems.map((item, index) => (
-            <div key={index} className="portfolio-item relative overflow-hidden rounded-lg group" onMouseEnter={() => setHoveredItem(index)} onMouseLeave={() => setHoveredItem(null)}>
+            <div key={index} className="portfolio-item relative overflow-hidden rounded-2xl group panel" onMouseEnter={() => setHoveredItem(index)} onMouseLeave={() => setHoveredItem(null)}>
               <div className="relative aspect-[4/5] overflow-hidden">
                 <img src={item.image || '/placeholder.svg'} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
 
@@ -113,7 +116,7 @@ export default function PortfolioSection() {
               </div>
 
               {/* Info below image */}
-              <div className="flex justify-between items-center mt-4 px-2">
+              <div className="flex justify-between items-center mt-4 px-4 pb-4">
                 <div>
                   <h3 className="text-xl font-bold">{item.title}</h3>
                   <p className="text-sm text-muted-foreground">{item.category}</p>

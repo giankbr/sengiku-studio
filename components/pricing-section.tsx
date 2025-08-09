@@ -142,13 +142,13 @@ export default function PricingSection() {
   };
 
   return (
-    <section ref={sectionRef} id="pricing" className="py-20 bg-background">
+    <section ref={sectionRef} id="pricing" className="section-pad bg-background subtle-section-gradient">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="pricing-title text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="pricing-title section-header mb-3">
             Simple, <span className="italic font-normal">Transparent</span> Pricing
           </h2>
-          <p className="pricing-subtitle text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
+          <p className="pricing-subtitle section-subtitle mb-12 mx-auto">
             Choose the right package for your project. All plans include high-quality code, responsive design, and our commitment to excellence.
           </p>
 
@@ -174,7 +174,7 @@ export default function PricingSection() {
             <div
               key={plan.name}
               className={cn(
-                'pricing-card relative rounded-xl border border-border p-8 bg-card transition-all duration-300 hover:shadow-lg hover:border-primary/30 flex flex-col h-full',
+                'pricing-card relative panel p-8 bg-card transition-all duration-300 hover:shadow-lg hover:border-primary/30 flex flex-col h-full',
                 plan.popular && 'ring-2 ring-primary/30 shadow-md'
               )}
             >

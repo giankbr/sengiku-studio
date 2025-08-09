@@ -93,14 +93,15 @@ export default function ContactSection() {
   };
 
   return (
-    <section ref={sectionRef} id="contact" className="py-24 bg-muted">
+    <section ref={sectionRef} id="contact" className="section-pad bg-muted">
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
-          <h2 className="contact-title text-4xl md:text-5xl lg:text-6xl font-bold mb-12 text-center">
+          <h2 className="contact-title section-header mb-3 text-center">
             Got a project? <span className="italic font-normal">Let's talk.</span>
           </h2>
+          <p className="section-subtitle mb-10 text-center mx-auto">We’re ready to help you plan, scope, and ship. Tell us a bit about your goals and timeline.</p>
 
-          <div className="bg-card rounded-2xl shadow-lg overflow-hidden">
+          <div className="bg-card panel overflow-hidden">
             <div className="grid md:grid-cols-2">
               {/* Contact Form */}
               <div className="contact-form p-8 md:p-12">

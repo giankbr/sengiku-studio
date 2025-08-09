@@ -32,7 +32,7 @@ const services = [
 
 export default function ServicesSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [activeService, setActiveService] = useState<number | null>(null);
+  const [activeService, setActiveService] = useState<number>(0);
 
   useEffect(() => {
     let ctx: any;
@@ -89,15 +89,13 @@ export default function ServicesSection() {
     };
   }, []);
 
-  // Animation for service image on hover
+  // Animation for service image on change
   useEffect(() => {
     let isMounted = true;
     (async () => {
-      if (activeService !== null) {
-        const { gsap } = await import('gsap');
-        if (!isMounted) return;
-        gsap.fromTo(`.service-image-${activeService}`, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' });
-      }
+      const { gsap } = await import('gsap');
+      if (!isMounted) return;
+      gsap.fromTo(`.service-image-${activeService}`, { opacity: 0, y: 8, scale: 0.98 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: 'power2.out' });
     })();
     return () => {
       isMounted = false;
@@ -105,39 +103,75 @@ export default function ServicesSection() {
   }, [activeService]);
 
   return (
-    <section ref={sectionRef} id="services" aria-labelledby="services-heading" className="py-20 bg-background">
+    <section ref={sectionRef} id="services" aria-labelledby="services-heading" className="section-pad subtle-section-gradient">
       <div className="container mx-auto px-4">
-        <h2 id="services-heading" className="services-title text-4xl md:text-5xl lg:text-6xl font-bold mb-12 flex items-center">
+        <h2 id="services-heading" className="services-title section-header mb-3 flex items-center">
           Our <span className="italic ml-3 font-normal">Services</span>
         </h2>
+        <p className="section-subtitle mb-10">Capabilities we use to design, build, and scale digital products for your business.</p>
 
-        <div className="space-y-16">
-          {services.map((service, index) => (
-            <div key={index} className="service-item border-t border-border pt-8" onMouseEnter={() => setActiveService(index)} onMouseLeave={() => setActiveService(null)}>
-              <div className="flex justify-between items-start mb-8">
-                <h3 className="text-3xl md:text-4xl font-bold">{service.title}</h3>
-                <button className="p-2 rounded-full border border-border hover:bg-muted transition-colors">
-                  <ArrowUpRight className="h-5 w-5" />
-                </button>
-              </div>
-
-              {/* Service image that appears on hover */}
-              <div className={`mb-8 transition-all duration-300 ${activeService === index ? 'block' : 'hidden'}`}>
-                <img src={service.image || '/placeholder.svg'} alt={`${service.title} service showcase image`} className={`service-image-${index} rounded-md w-full max-w-md object-cover opacity-0`} />
-              </div>
-
-              <ul className="flex flex-wrap gap-4" aria-label="Technologies and deliverables">
-                {service.items.map(
-                  (item, i) =>
-                    item && (
-                      <li key={i} className="px-4 py-2 rounded-full bg-muted text-sm hover:bg-primary/10 transition-colors cursor-pointer">
-                        {item}
-                      </li>
-                    )
-                )}
-              </ul>
+        <div className="grid lg:grid-cols-12 gap-10">
+          {/* Left: list */}
+          <div className="lg:col-span-6">
+            <div className="panel divide-y">
+              {services.map((service, index) => {
+                const isActive = activeService === index;
+                return (
+                  <button
+                    key={service.id}
+                    className={`service-item w-full text-left px-6 md:px-8 py-6 transition-colors focus:outline-none ${isActive ? 'bg-muted/50' : 'hover:bg-muted/40'}`}
+                    onMouseEnter={() => setActiveService(index)}
+                    onFocus={() => setActiveService(index)}
+                    onClick={() => setActiveService(index)}
+                    aria-selected={isActive}
+                  >
+                    <div className="flex items-start justify-between gap-6">
+                      <div>
+                        <h3 className="text-xl md:text-2xl font-semibold">{service.title}</h3>
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          {service.items.slice(0, 4).map((chip) => (
+                            <span key={chip} className="px-3 py-1 rounded-full bg-muted text-xs">
+                              {chip}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <span className={`inline-flex h-9 w-9 items-center justify-center rounded-full border ${isActive ? 'bg-primary text-primary-foreground' : ''}`}>
+                        <ArrowUpRight className="h-4 w-4" />
+                      </span>
+                    </div>
+                  </button>
+                );
+              })}
             </div>
-          ))}
+          </div>
+
+          {/* Right: sticky preview */}
+          <div className="lg:col-span-6">
+            <div className="sticky top-24">
+              <div className="panel overflow-hidden p-6 md:p-8">
+                <div className="aspect-[4/3] w-full overflow-hidden rounded-xl mb-6">
+                  {services.map((s, i) => (
+                    <img
+                      key={s.id}
+                      src={s.image || '/placeholder.svg'}
+                      alt={`${s.title} preview`}
+                      className={`service-image-${i} w-full h-full object-cover transition-opacity duration-300 ${activeService === i ? 'opacity-100' : 'opacity-0 absolute inset-0'}`}
+                    />
+                  ))}
+                </div>
+                <h3 className="text-2xl font-bold mb-2">{services[activeService].title}</h3>
+                <p className="text-sm text-muted-foreground mb-4">What you get</p>
+                <ul className="flex flex-wrap gap-2">
+                  {services[activeService].items.map((item) => (
+                    <li key={item} className="px-3 py-1 rounded-full bg-muted text-xs">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

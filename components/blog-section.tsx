@@ -84,19 +84,20 @@ export default function BlogSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-20 bg-background">
+    <section ref={sectionRef} className="section-pad bg-background">
       <div className="container mx-auto px-4">
-        <h2 className="blog-title text-4xl md:text-5xl font-bold mb-12">
+        <h2 className="blog-title section-header mb-3">
           Blog <span className="italic font-normal">Hub</span>
         </h2>
+        <p className="section-subtitle mb-10">Insights, stories, and practical notes from our day-to-day building digital products.</p>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogPosts.map((post, index) => (
-            <Link href="#" key={index} className="blog-post group">
-              <div className="mb-4 overflow-hidden rounded-lg">
+            <Link href="#" key={index} className="blog-post group panel overflow-hidden">
+              <div className="mb-4 overflow-hidden">
                 <img src={post.image || '/placeholder.svg'} alt={post.title} className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
               </div>
-              <div className="space-y-2">
+              <div className="space-y-2 px-6 pb-6">
                 <p className="text-sm text-muted-foreground">{post.date}</p>
                 <h3 className="text-xl font-bold group-hover:text-primary transition-colors">{post.title}</h3>
                 <p className="text-sm text-muted-foreground line-clamp-3">{post.excerpt}</p>
