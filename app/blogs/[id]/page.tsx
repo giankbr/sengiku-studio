@@ -5,7 +5,7 @@ import Navbar from '@/components/navbar';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 // Lazy-load GSAP on client to avoid SSR issues
-import { ArrowLeft, Calendar, Clock, Share2, User } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, Share2 } from 'lucide-react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useEffect, useRef } from 'react';
@@ -218,6 +218,256 @@ const blogPostsData = {
     tags: ['Leadership', 'Team Management', 'Creative Process', 'Design Teams'],
     relatedPosts: ['building-positive-office', 'crafting-experiences', 'effective-online-meetings'],
   },
+  'effective-online-meetings': {
+    title: 'Tips for More Effective Online Meetings',
+    excerpt: "In today's digital-first world, online meetings are more important than ever. Learn how to make your virtual collaborations more productive and engaging with these practical tips.",
+    date: 'Nov 4, 2024',
+    author: 'Yuki Sato',
+    authorRole: 'Communication Specialist',
+    readTime: '4 min read',
+    category: 'Design',
+    image: '/placeholder.svg?height=800&width=1200',
+    content: `
+      <h2>Introduction</h2>
+      <p>As remote work becomes increasingly common, the ability to conduct effective online meetings has become a crucial skill for professionals across all industries. This article provides practical strategies to make your virtual meetings more productive, engaging, and successful.</p>
+      
+      <h2>Preparation is Key</h2>
+      <p>Successful online meetings start long before the actual session:</p>
+      <ul>
+        <li>Set clear objectives and create a focused agenda</li>
+        <li>Share materials and pre-reading at least 24 hours in advance</li>
+        <li>Test your technology and internet connection beforehand</li>
+        <li>Choose the right platform for your meeting type and audience size</li>
+        <li>Set up a backup plan in case of technical difficulties</li>
+      </ul>
+      
+      <h2>Creating an Engaging Environment</h2>
+      <p>Keep participants engaged and focused throughout the meeting:</p>
+      <ul>
+        <li>Start with a brief check-in to build connection</li>
+        <li>Use visual aids and screen sharing to maintain interest</li>
+        <li>Incorporate interactive elements like polls or breakout rooms</li>
+        <li>Encourage camera use when appropriate to maintain human connection</li>
+        <li>Take regular breaks for longer sessions</li>
+      </ul>
+      
+      <h2>Effective Communication Techniques</h2>
+      <p>Clear communication is even more important in virtual settings:</p>
+      <ul>
+        <li>Speak clearly and at a measured pace</li>
+        <li>Use hand signals or chat features to indicate when you want to speak</li>
+        <li>Summarize key points and decisions as you go</li>
+        <li>Ask for confirmation to ensure understanding</li>
+        <li>Use the mute function appropriately to reduce background noise</li>
+      </ul>
+      
+      <h2>Managing Meeting Flow</h2>
+      <p>Keep your meetings on track and productive:</p>
+      <ul>
+        <li>Start and end on time to respect participants' schedules</li>
+        <li>Assign a timekeeper to monitor the agenda</li>
+        <li>Use the parking lot technique for off-topic discussions</li>
+        <li>End with clear action items and next steps</li>
+        <li>Follow up with meeting notes and action items within 24 hours</li>
+      </ul>
+      
+      <h2>Conclusion</h2>
+      <p>Effective online meetings require thoughtful preparation, clear communication, and active engagement strategies. By implementing these practices, you can create virtual meetings that are not only productive but also enjoyable for all participants. Remember that the goal is to maintain the human connection and collaborative spirit that makes in-person meetings valuable, even in a digital environment.</p>
+    `,
+    tags: ['Remote Work', 'Communication', 'Productivity', 'Virtual Collaboration'],
+    relatedPosts: ['building-positive-office', 'managing-creative-teams', 'crafting-experiences'],
+  },
+  'color-theory-design': {
+    title: 'Understanding Color Theory in Modern Design',
+    excerpt: "Color is one of the most powerful tools in a designer's toolkit. This comprehensive guide explores color theory principles and how to apply them effectively in your design projects.",
+    date: 'Oct 28, 2024',
+    author: 'Mika Yamamoto',
+    authorRole: 'Visual Designer',
+    readTime: '8 min read',
+    category: 'Design',
+    image: '/placeholder.svg?height=800&width=1200',
+    content: `
+      <h2>Introduction</h2>
+      <p>Color theory is fundamental to creating effective and visually appealing designs. Understanding how colors work together, their psychological impact, and their cultural significance can transform your design work from good to exceptional.</p>
+      
+      <h2>The Color Wheel and Basic Principles</h2>
+      <p>The color wheel is the foundation of color theory:</p>
+      <ul>
+        <li>Primary colors: Red, blue, and yellow</li>
+        <li>Secondary colors: Green, orange, and purple</li>
+        <li>Tertiary colors: Combinations of primary and secondary colors</li>
+        <li>Complementary colors: Colors opposite each other on the wheel</li>
+        <li>Analogous colors: Colors next to each other on the wheel</li>
+      </ul>
+      
+      <h2>Color Psychology</h2>
+      <p>Different colors evoke different emotional responses:</p>
+      <ul>
+        <li>Red: Energy, passion, urgency</li>
+        <li>Blue: Trust, stability, professionalism</li>
+        <li>Green: Growth, nature, harmony</li>
+        <li>Yellow: Optimism, creativity, attention</li>
+        <li>Purple: Luxury, creativity, mystery</li>
+        <li>Orange: Enthusiasm, adventure, confidence</li>
+      </ul>
+      
+      <h2>Practical Application</h2>
+      <p>Apply color theory effectively in your designs:</p>
+      <ul>
+        <li>Use complementary colors for high contrast and visual impact</li>
+        <li>Create harmony with analogous color schemes</li>
+        <li>Consider cultural color associations for global audiences</li>
+        <li>Ensure sufficient contrast for accessibility</li>
+        <li>Use color to guide user attention and create hierarchy</li>
+      </ul>
+      
+      <h2>Conclusion</h2>
+      <p>Mastering color theory takes practice and experimentation. Start with the basics, understand your audience, and don't be afraid to break the rules once you understand them. The most successful designs often use color thoughtfully and intentionally to enhance both aesthetics and functionality.</p>
+    `,
+    tags: ['Color Theory', 'Visual Design', 'Design Principles', 'Psychology'],
+    relatedPosts: ['typography-fundamentals', 'crafting-experiences', 'branding-small-business'],
+  },
+  'typography-fundamentals': {
+    title: 'Typography Fundamentals Every Designer Should Know',
+    excerpt: 'Typography can make or break your design. Learn the essential principles of typography that will elevate your design work and improve readability and user experience.',
+    date: 'Oct 21, 2024',
+    author: 'Kenji Tanaka',
+    authorRole: 'Typography Specialist',
+    readTime: '6 min read',
+    category: 'Design',
+    image: '/placeholder.svg?height=800&width=1200',
+    content: `
+      <h2>Introduction</h2>
+      <p>Typography is more than just choosing fonts—it's about creating clear, readable, and visually appealing text that enhances your design's message and user experience.</p>
+      
+      <h2>Typeface Selection</h2>
+      <p>Choose typefaces that align with your design goals:</p>
+      <ul>
+        <li>Serif fonts: Traditional, trustworthy, formal</li>
+        <li>Sans-serif fonts: Modern, clean, approachable</li>
+        <li>Display fonts: Creative, attention-grabbing, decorative</li>
+        <li>Monospace fonts: Technical, code-like, structured</li>
+      </ul>
+      
+      <h2>Hierarchy and Scale</h2>
+      <p>Create clear visual hierarchy through typography:</p>
+      <ul>
+        <li>Use size to indicate importance</li>
+        <li>Establish consistent scale relationships</li>
+        <li>Limit your typeface choices to 2-3 per project</li>
+        <li>Use weight and style variations for emphasis</li>
+      </ul>
+      
+      <h2>Readability and Legibility</h2>
+      <p>Ensure your text is easy to read:</p>
+      <ul>
+        <li>Choose appropriate line lengths (45-75 characters)</li>
+        <li>Set comfortable line spacing (1.4-1.6 for body text)</li>
+        <li>Ensure sufficient contrast with backgrounds</li>
+        <li>Consider reading distance and device context</li>
+      </ul>
+      
+      <h2>Conclusion</h2>
+      <p>Good typography is invisible—it helps readers focus on the content rather than the presentation. By mastering these fundamentals, you'll create designs that are both beautiful and functional.</p>
+    `,
+    tags: ['Typography', 'Design Principles', 'Readability', 'Visual Hierarchy'],
+    relatedPosts: ['color-theory-design', 'crafting-experiences', 'branding-small-business'],
+  },
+  'branding-small-business': {
+    title: 'Effective Branding Strategies for Small Businesses',
+    excerpt: 'Small businesses face unique challenges when it comes to branding. Discover practical strategies to create a memorable brand identity without breaking the bank.',
+    date: 'Oct 14, 2024',
+    author: 'Sakura Kimura',
+    authorRole: 'Brand Strategist',
+    readTime: '5 min read',
+    category: 'Branding',
+    image: '/placeholder.svg?height=800&width=1200',
+    content: `
+      <h2>Introduction</h2>
+      <p>Branding is crucial for small businesses to stand out in competitive markets. This guide provides practical strategies to create a strong brand identity on a budget.</p>
+      
+      <h2>Understanding Your Brand</h2>
+      <p>Start by defining your brand foundation:</p>
+      <ul>
+        <li>Identify your unique value proposition</li>
+        <li>Define your target audience clearly</li>
+        <li>Establish your brand personality and voice</li>
+        <li>Create a compelling brand story</li>
+      </ul>
+      
+      <h2>Visual Identity on a Budget</h2>
+      <p>Create professional visuals without high costs:</p>
+      <ul>
+        <li>Use online logo makers and design tools</li>
+        <li>Choose a simple, memorable logo design</li>
+        <li>Develop a consistent color palette</li>
+        <li>Create templates for marketing materials</li>
+      </ul>
+      
+      <h2>Digital Presence</h2>
+      <p>Build your brand online effectively:</p>
+      <ul>
+        <li>Maintain consistent messaging across platforms</li>
+        <li>Use social media to showcase your personality</li>
+        <li>Create valuable content for your audience</li>
+        <li>Engage with customers authentically</li>
+      </ul>
+      
+      <h2>Conclusion</h2>
+      <p>Effective branding for small businesses is about consistency, authenticity, and understanding your audience. Focus on building genuine connections rather than competing with larger budgets.</p>
+    `,
+    tags: ['Branding', 'Small Business', 'Marketing', 'Brand Identity'],
+    relatedPosts: ['color-theory-design', 'typography-fundamentals', 'illustration-trends'],
+  },
+  'illustration-trends': {
+    title: 'Current Trends in Digital Illustration',
+    excerpt: 'The world of digital illustration is constantly evolving. Stay ahead of the curve with this overview of the latest trends and techniques in the field.',
+    date: 'Oct 7, 2024',
+    author: 'Hiroshi Watanabe',
+    authorRole: 'Digital Artist',
+    readTime: '7 min read',
+    category: 'Illustration',
+    image: '/placeholder.svg?height=800&width=1200',
+    content: `
+      <h2>Introduction</h2>
+      <p>Digital illustration continues to evolve with new tools, techniques, and styles emerging regularly. This article explores current trends that are shaping the industry.</p>
+      
+      <h2>Emerging Styles</h2>
+      <p>Popular illustration styles in 2024:</p>
+      <ul>
+        <li>3D illustration with depth and dimension</li>
+        <li>Isometric designs for technical and business contexts</li>
+        <li>Hand-drawn digital styles with organic textures</li>
+        <li>Minimalist line art with bold colors</li>
+        <li>Mixed media combining digital and traditional techniques</li>
+      </ul>
+      
+      <h2>Technology and Tools</h2>
+      <p>New tools are expanding creative possibilities:</p>
+      <ul>
+        <li>AI-assisted illustration tools</li>
+        <li>Advanced brush systems in digital painting software</li>
+        <li>Real-time collaboration features</li>
+        <li>Improved tablet and stylus technology</li>
+        <li>Cloud-based workflow solutions</li>
+      </ul>
+      
+      <h2>Industry Applications</h2>
+      <p>Illustration is finding new applications:</p>
+      <ul>
+        <li>Enhanced user interface design</li>
+        <li>Educational and instructional content</li>
+        <li>Brand storytelling and marketing</li>
+        <li>Product visualization and packaging</li>
+        <li>Editorial and publishing</li>
+      </ul>
+      
+      <h2>Conclusion</h2>
+      <p>The future of digital illustration is bright, with new technologies and styles constantly emerging. Stay curious, experiment with new tools, and develop your unique artistic voice.</p>
+    `,
+    tags: ['Digital Illustration', 'Art Trends', 'Creative Tools', 'Visual Design'],
+    relatedPosts: ['branding-small-business', 'color-theory-design', 'crafting-experiences'],
+  },
 };
 
 export default function BlogDetailPage() {
@@ -304,114 +554,142 @@ export default function BlogDetailPage() {
       <main className="pt-24 pb-20">
         <div className="container mx-auto px-4">
           {/* Back to blogs link */}
-          <Link href="/blogs" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-6">
+          <Link href="/blogs" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-8 transition-colors">
             <ArrowLeft className="mr-2 h-4 w-4" /> Back to Blogs
           </Link>
 
-          {/* Blog Header */}
-          <div className="max-w-4xl mx-auto mb-8">
-            <div className="fade-in mb-4">
-              <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">{post.category}</span>
+          {/* Hero Section */}
+          <div className="max-w-5xl mx-auto mb-12">
+            <div className="fade-in mb-6">
+              <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium border border-primary/20">{post.category}</span>
             </div>
-            <h1 className="fade-in text-3xl md:text-4xl lg:text-5xl font-bold mb-6">{post.title}</h1>
+            <h1 className="fade-in text-4xl md:text-5xl lg:text-6xl font-bold mb-8 leading-tight">{post.title}</h1>
 
-            <div className="fade-in flex flex-wrap items-center text-sm text-muted-foreground gap-4 mb-8">
-              <div className="flex items-center">
-                <User className="h-4 w-4 mr-2" />
-                <span>
-                  {post.author}, {post.authorRole}
-                </span>
+            {/* Author and Meta Info */}
+            <div className="fade-in flex flex-col md:flex-row md:items-center gap-6 mb-8">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full overflow-hidden">
+                  <img src="/placeholder.svg?height=200&width=200" alt={post.author} className="w-full h-full object-cover" />
+                </div>
+                <div>
+                  <p className="font-semibold text-foreground">{post.author}</p>
+                  <p className="text-sm text-muted-foreground">{post.authorRole}</p>
+                </div>
               </div>
-              <div className="flex items-center">
-                <Calendar className="h-4 w-4 mr-2" />
-                <span>{post.date}</span>
-              </div>
-              <div className="flex items-center">
-                <Clock className="h-4 w-4 mr-2" />
-                <span>{post.readTime}</span>
+              <div className="flex items-center gap-6 text-sm text-muted-foreground">
+                <div className="flex items-center">
+                  <Calendar className="h-4 w-4 mr-2" />
+                  <span>{post.date}</span>
+                </div>
+                <div className="flex items-center">
+                  <Clock className="h-4 w-4 mr-2" />
+                  <span>{post.readTime}</span>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Featured Image */}
-          <div className="fade-in max-w-4xl mx-auto mb-10">
-            <img src={post.image || '/placeholder.svg'} alt={post.title} className="w-full rounded-lg" />
+          <div className="fade-in max-w-5xl mx-auto mb-16">
+            <div className="relative aspect-[21/9] w-full overflow-hidden rounded-2xl">
+              <img src={post.image || '/placeholder.svg'} alt={post.title} className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+            </div>
           </div>
 
-          {/* Blog Content */}
-          <div className="fade-in max-w-3xl mx-auto mb-16">
-            <div className="prose prose-lg dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
+          {/* Content Grid */}
+          <div className="grid lg:grid-cols-12 gap-12 max-w-7xl mx-auto">
+            {/* Main Content */}
+            <div className="lg:col-span-8">
+              <div className="fade-in">
+                <div
+                  className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-p:text-muted-foreground prose-p:leading-relaxed prose-ul:my-6 prose-li:my-2"
+                  dangerouslySetInnerHTML={{ __html: post.content }}
+                />
+              </div>
 
-            {/* Tags */}
-            <div className="mt-10 pt-6 border-t">
-              <div className="flex flex-wrap gap-2">
-                {post.tags.map((tag, index) => (
-                  <span key={index} className="px-3 py-1 rounded-full bg-muted text-sm text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors cursor-pointer">
-                    {tag}
-                  </span>
-                ))}
+              {/* Tags */}
+              <div className="mt-12 pt-8 border-t border-border/50">
+                <h3 className="text-sm font-semibold text-muted-foreground mb-4">Tags</h3>
+                <div className="flex flex-wrap gap-2">
+                  {post.tags.map((tag, index) => (
+                    <span
+                      key={index}
+                      className="px-4 py-2 rounded-full bg-muted/50 text-sm text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors cursor-pointer border border-border/50"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Share */}
+              <div className="mt-8 flex items-center gap-4">
+                <span className="text-sm font-medium text-muted-foreground">Share this article:</span>
+                <button className="p-2 rounded-full hover:bg-muted transition-colors border border-border/50">
+                  <Share2 className="h-4 w-4" />
+                </button>
               </div>
             </div>
 
-            {/* Share */}
-            <div className="mt-8 flex items-center gap-4">
-              <span className="text-sm font-medium">Share this article:</span>
-              <button className="p-2 rounded-full hover:bg-muted transition-colors">
-                <Share2 className="h-4 w-4" />
-              </button>
-            </div>
-          </div>
+            {/* Sidebar */}
+            <aside className="lg:col-span-4 space-y-8">
+              {/* Author Bio */}
+              <div className="fade-in panel p-6">
+                <h3 className="text-lg font-semibold mb-4">About the author</h3>
+                <div className="flex items-start gap-4">
+                  <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
+                    <img src="/placeholder.svg?height=200&width=200" alt={post.author} className="w-full h-full object-cover" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-1">{post.author}</h4>
+                    <p className="text-sm text-primary mb-2">{post.authorRole}</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      A passionate designer with over a decade of experience in creating meaningful digital experiences. Specializing in user-centered design approaches that balance aesthetics with
+                      functionality.
+                    </p>
+                  </div>
+                </div>
+              </div>
 
-          {/* Author Bio */}
-          <div className="fade-in max-w-3xl mx-auto mb-16 p-6 bg-muted dark:bg-zinc-900 rounded-lg flex flex-col md:flex-row gap-6 items-center md:items-start">
-            <div className="w-20 h-20 rounded-full overflow-hidden flex-shrink-0">
-              <img src="/placeholder.svg?height=200&width=200" alt={post.author} className="w-full h-full object-cover" />
-            </div>
-            <div>
-              <h3 className="text-xl font-bold mb-1">{post.author}</h3>
-            </div>
-            <div>
-              <h3 className="text-xl font-bold mb-1">{post.author}</h3>
-              <p className="text-sm text-primary mb-2">{post.authorRole}</p>
-              <p className="text-sm text-muted-foreground">
-                A passionate designer with over a decade of experience in creating meaningful digital experiences. Specializing in user-centered design approaches that balance aesthetics with
-                functionality.
-              </p>
-            </div>
+              {/* Newsletter */}
+              <div className="fade-in panel p-6 text-center">
+                <h3 className="text-lg font-semibold mb-2">Stay updated</h3>
+                <p className="text-sm text-muted-foreground mb-4">Get the latest articles and insights delivered to your inbox.</p>
+                <div className="space-y-3">
+                  <Input type="email" placeholder="Enter your email" className="h-10" />
+                  <Button className="w-full h-10">Subscribe</Button>
+                </div>
+              </div>
+            </aside>
           </div>
 
           {/* Related Posts */}
           {relatedPosts.length > 0 && (
-            <div className="max-w-5xl mx-auto mb-16">
-              <h2 className="fade-in text-2xl font-bold mb-8">You might also like</h2>
+            <div className="max-w-7xl mx-auto mt-20">
+              <h2 className="fade-in text-3xl font-bold mb-10 text-center">You might also like</h2>
               <div className="grid md:grid-cols-3 gap-8">
-                {relatedPosts.map((relatedPost, index) => (
-                  <Link href={`/blogs/${relatedPost.id}`} key={index} className="related-post group">
-                    <div className="mb-4 overflow-hidden rounded-lg">
-                      <img src={relatedPost.image || '/placeholder.svg'} alt={relatedPost.title} className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
-                    </div>
-                    <div className="space-y-2">
-                      <div className="flex justify-between items-center text-sm text-muted-foreground">
-                        <span>{relatedPost.date}</span>
-                        <span>{relatedPost.readTime}</span>
-                      </div>
-                      <h3 className="text-lg font-bold group-hover:text-primary transition-colors line-clamp-2">{relatedPost.title}</h3>
-                    </div>
-                  </Link>
-                ))}
+                {relatedPosts.map(
+                  (relatedPost, index) =>
+                    relatedPost && (
+                      <Link href={`/blogs/${relatedPost.id}`} key={index} className="related-post panel overflow-hidden group">
+                        <div className="aspect-[16/10] w-full overflow-hidden">
+                          <img src={relatedPost.image || '/placeholder.svg'} alt={relatedPost.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                        </div>
+                        <div className="p-6 space-y-3">
+                          <div className="flex justify-between items-center text-xs text-muted-foreground">
+                            <span>{relatedPost.date}</span>
+                            <span>{relatedPost.readTime}</span>
+                          </div>
+                          <h3 className="text-lg font-semibold group-hover:text-primary transition-colors line-clamp-2">{relatedPost.title}</h3>
+                          <p className="text-sm text-muted-foreground line-clamp-2">{relatedPost.excerpt}</p>
+                        </div>
+                      </Link>
+                    )
+                )}
               </div>
             </div>
           )}
-
-          {/* Newsletter */}
-          <div className="fade-in max-w-3xl mx-auto py-10 px-8 bg-muted dark:bg-zinc-900 rounded-lg text-center">
-            <h3 className="text-xl font-bold mb-4">Enjoyed this article?</h3>
-            <p className="text-muted-foreground mb-6">Subscribe to our newsletter to get more insights on design, creativity, and industry trends.</p>
-            <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-              <Input type="email" placeholder="Enter your email" className="flex-1" />
-              <Button>Subscribe</Button>
-            </div>
-          </div>
         </div>
       </main>
 
