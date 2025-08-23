@@ -14,7 +14,7 @@ const config = {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-outfit)'],
+        sans: ['var(--font-urbanist)'],
       },
       colors: {
         border: 'hsl(var(--border))',
