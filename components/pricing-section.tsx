@@ -14,10 +14,21 @@ const plans = [
     name: 'Starter',
     description: 'Perfect for small businesses and personal websites',
     price: {
-      monthly: 500, // $500 per month
-      yearly: 5400, // $5,400 per year (10% discount)
+      monthly: 1500, // $1,500 per month
+      yearly: 16200, // $16,200 per year (10% discount)
     },
-    features: ['Responsive website (up to 5 pages)', 'Mobile optimization', 'Basic SEO setup', 'Contact form integration', '3 rounds of revisions', '1 month of support'],
+    features: [
+      'Responsive website (up to 5 pages)',
+      'Mobile optimization',
+      'Basic SEO setup',
+      'Contact form integration',
+      'Google Analytics integration',
+      'Social media integration',
+      '3 rounds of revisions',
+      '1 month of support',
+      'Basic security setup',
+      'Performance optimization',
+    ],
     cta: 'Get Started',
     popular: false,
   },
@@ -25,18 +36,24 @@ const plans = [
     name: 'Business',
     description: 'Comprehensive solution for growing businesses',
     price: {
-      monthly: 1000, // $1,000 per month
-      yearly: 10800, // $10,800 per year (10% discount)
+      monthly: 3500, // $3,500 per month
+      yearly: 37800, // $37,800 per year (10% discount)
     },
     features: [
-      'Responsive website (up to 10 pages)',
+      'Responsive website (up to 15 pages)',
       'Custom design & branding',
       'Advanced SEO optimization',
       'Content management system',
       'Email newsletter setup',
       'Performance optimization',
+      'E-commerce integration',
+      'Payment gateway setup',
+      'Advanced analytics & reporting',
+      'Social media management tools',
       '5 rounds of revisions',
       '3 months of support',
+      'Security hardening',
+      'Backup & recovery system',
     ],
     cta: 'Choose Business',
     popular: true,
@@ -45,8 +62,8 @@ const plans = [
     name: 'Enterprise',
     description: 'Custom development for complex requirements',
     price: {
-      monthly: 2000, // $2,000 per month
-      yearly: 21600, // $21,600 per year (10% discount)
+      monthly: 7500, // $7,500 per month
+      yearly: 81000, // $81,000 per year (10% discount)
     },
     features: [
       'Fully custom website development',
@@ -56,8 +73,15 @@ const plans = [
       'API development & integration',
       'Comprehensive SEO strategy',
       'Performance & security optimization',
+      'Multi-language support',
+      'Advanced user management',
+      'Custom reporting dashboard',
+      'Third-party integrations',
+      'Scalable architecture',
       'Unlimited revisions',
       '12 months of priority support',
+      '24/7 monitoring',
+      'Dedicated project manager',
     ],
     cta: 'Contact Us',
     popular: false,
@@ -149,7 +173,7 @@ export default function PricingSection() {
             Simple, <span className="italic font-normal">Transparent</span> Pricing
           </h2>
           <p className="pricing-subtitle section-subtitle mb-12 mx-auto">
-            Choose the right package for your project. All plans include high-quality code, responsive design, and our commitment to excellence.
+            Choose the right package for your project. All plans include enterprise-grade development, premium support, and our commitment to delivering exceptional digital experiences.
           </p>
 
           {/* Pricing toggle */}
@@ -222,11 +246,13 @@ export default function PricingSection() {
 
         {/* Enterprise callout */}
         <div className="mt-16 text-center max-w-4xl mx-auto">
-          <h3 className="text-xl font-semibold mb-4">Need a custom solution?</h3>
-          <p className="text-muted-foreground mb-6">We also offer tailored packages for specific requirements. Contact us to discuss how we can help with your unique project needs.</p>
+          <h3 className="text-xl font-semibold mb-4">Need a custom enterprise solution?</h3>
+          <p className="text-muted-foreground mb-6">
+            We offer bespoke development packages for large-scale projects, custom integrations, and specialized requirements. Contact us to discuss your enterprise needs.
+          </p>
           <Link href="/contact">
             <Button variant="outline" className="rounded-full">
-              Get Custom Quote
+              Get Enterprise Quote
             </Button>
           </Link>
         </div>
