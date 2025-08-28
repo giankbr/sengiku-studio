@@ -11,8 +11,42 @@ const urbanist = Urbanist({
 });
 
 export const metadata: Metadata = {
-  title: 'Sengiku Studio | Web Design & Development',
-  description: 'We create stunning digital experiences that drive results. Sengiku Studio is a professional web studio specializing in web design, development, and digital solutions..',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3002'),
+  title: {
+    default: 'Sengiku Studio | Web Design & Development',
+    template: '%s | Sengiku Studio',
+  },
+  description: 'We create stunning digital experiences that drive results. Sengiku Studio is a professional web studio specializing in web design, development, and digital solutions.',
+  applicationName: 'Sengiku Studio',
+  keywords: ['web design', 'web development', 'frontend', 'Next.js', 'React', 'Tailwind CSS', 'UI/UX', 'Sengiku Studio'],
+  authors: [{ name: 'Sengiku Studio' }],
+  openGraph: {
+    type: 'website',
+    url: '/',
+    title: 'Sengiku Studio | Web Design & Development',
+    description: 'We create stunning digital experiences that drive results. Sengiku Studio is a professional web studio specializing in web design, development, and digital solutions.',
+    siteName: 'Sengiku Studio',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Sengiku Studio | Web Design & Development',
+    description: 'We create stunning digital experiences that drive results. Sengiku Studio is a professional web studio specializing in web design, development, and digital solutions.',
+    creator: '@sengikustudio',
+  },
+  alternates: {
+    canonical: '/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
 };
 
 export default function RootLayout({
