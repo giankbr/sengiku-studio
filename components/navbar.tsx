@@ -11,10 +11,8 @@ import { useEffect, useState } from 'react';
 
 const navLinks = [
   { name: 'Home', href: '/' },
-  // { name: 'About Us', href: '/about' },
-  { name: 'Projects', href: '/projects' },
   { name: 'Services', href: '/services' },
-  // { name: 'Blogs', href: '/blogs' },
+  { name: 'Project', href: '/projects' },
 ];
 
 export default function Navbar() {
@@ -41,37 +39,47 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={cn('fixed inset-x-0 top-0 z-50 transition-all duration-300', scrolled ? 'bg-background/80 supports-[backdrop-filter]:bg-background/70 backdrop-blur border-b' : 'bg-transparent')}
+        className={cn('fixed inset-x-0 top-0 z-50 transition-all duration-300', scrolled ? 'bg-background/70 supports-[backdrop-filter]:bg-background/60 backdrop-blur border-b' : 'bg-transparent')}
       >
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+        <div className="container mx-auto px-4 h-20 grid grid-cols-2 md:grid-cols-3 items-center">
           {/* Brand */}
-          <Link href="/" className="text-xl md:text-2xl font-bold tracking-tight">
-            Sengiku Studio
-          </Link>
+          <div className="flex items-center">
+            <Link href="/" className="text-xl md:text-2xl font-bold tracking-tight">
+              Sengiku Studio
+            </Link>
+          </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-6">
+          {/* Desktop Navigation - centered */}
+          <div className="hidden md:flex items-center justify-center gap-2">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
-                <Link key={link.name} href={link.href} className={cn('relative text-sm text-muted-foreground hover:text-foreground transition-colors', isActive && 'text-foreground')}>
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={cn(
+                    'text-sm md:text-[15px] tracking-tight px-3 py-2 rounded-full transition-colors',
+                    isActive ? 'bg-muted/60 text-foreground' : 'text-muted-foreground hover:text-foreground hover:bg-muted/40'
+                  )}
+                >
                   <span>{link.name}</span>
-                  <span className={cn('absolute left-0 -bottom-1 h-[2px] w-full origin-left scale-x-0 bg-primary transition-transform duration-300', isActive && 'scale-x-100')} />
                 </Link>
               );
             })}
           </div>
 
-          {/* Desktop Actions */}
-          <div className="hidden md:flex items-center gap-3">
+          {/* Desktop Actions - right */}
+          <div className="hidden md:flex items-center justify-end gap-3">
             <Link href="/contact">
-              <Button className="rounded-full px-5">Contact</Button>
+              <Button variant="outline" className="rounded-full px-5">
+                Contact Us
+              </Button>
             </Link>
             <ThemeToggle />
           </div>
 
           {/* Mobile Actions */}
-          <div className="flex md:hidden items-center gap-2">
+          <div className="flex md:hidden items-center justify-end gap-2 col-span-1">
             <ThemeToggle />
             <Sheet>
               <SheetTrigger asChild>
@@ -80,11 +88,17 @@ export default function Navbar() {
                   <span className="sr-only">Open menu</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-full sm:max-w-sm">
-                <div className="mt-8 flex flex-col gap-4">
+              <SheetContent side="right" className="w-full sm:max-w-sm" aria-label="Mobile navigation menu">
+                <div className="mt-8 flex flex-col gap-2">
                   {navLinks.map((link) => (
                     <SheetClose asChild key={link.name}>
-                      <Link href={link.href} className={cn('text-lg py-2 text-muted-foreground hover:text-foreground transition-colors', pathname === link.href && 'text-foreground')}>
+                      <Link
+                        href={link.href}
+                        className={cn(
+                          'text-base px-3 py-3 rounded-full transition-colors',
+                          pathname === link.href ? 'bg-muted/60 text-foreground' : 'text-muted-foreground hover:text-foreground hover:bg-muted/40'
+                        )}
+                      >
                         {link.name}
                       </Link>
                     </SheetClose>

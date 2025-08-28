@@ -158,7 +158,7 @@ export default function ProjectsPage() {
     <div ref={pageRef} className="min-h-screen">
       <Navbar />
 
-      <main className="pt-24 pb-20">
+      <main className="pt-24 pb-20 mt-10">
         <div className="container mx-auto px-4">
           {/* Header */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-end mb-14">
@@ -255,9 +255,11 @@ export default function ProjectsPage() {
               <p className="mt-6 text-muted-foreground max-w-md">Get in touch for a no obligation casual chat to discuss your needs. Our door is always open for a good cup of coffee.</p>
             </div>
             <div className="flex md:justify-end">
-              <Link href="/contact" className="group inline-flex items-center justify-center w-16 h-16 rounded-full border hover:bg-primary hover:text-primary-foreground transition-colors">
-                <ArrowUpRight className="h-6 w-6 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </Link>
+              <Button asChild variant="outline" size="icon" className="rounded-full w-16 h-16">
+                <Link href="/contact">
+                  <ArrowUpRight className="h-6 w-6" />
+                </Link>
+              </Button>
             </div>
           </div>
         </div>

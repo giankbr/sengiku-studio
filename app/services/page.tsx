@@ -3,128 +3,120 @@
 import Footer from '@/components/footer';
 import Navbar from '@/components/navbar';
 import { Button } from '@/components/ui/button';
-// Lazy-load GSAP on client to avoid SSR issues
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
-import { useEffect, useRef } from 'react';
-
-const services = [
-  {
-    id: 'web-development',
-    title: 'Web Development',
-    description: 'We build fast, responsive, and user-friendly websites using the latest web technologies.',
-    image: '/placeholder.svg?height=400&width=600',
-    items: ['Next.js', 'React', 'Vue.js', 'WordPress', 'Tailwind CSS', 'Full-Stack'],
-  },
-  {
-    id: 'e-commerce',
-    title: 'E-commerce Solutions',
-    description: 'We develop custom online stores that drive sales and provide seamless shopping experiences.',
-    image: '/placeholder.svg?height=400&width=600',
-    items: ['Shopify', 'WooCommerce', 'Custom Stores', 'Payment Integration', 'Inventory Management'],
-  },
-  {
-    id: 'backend-systems',
-    title: 'Backend Systems',
-    description: 'We architect robust, scalable backend systems that power your digital products.',
-    image: '/placeholder.svg?height=400&width=600',
-    items: ['API Development', 'Node.js', 'Python', 'Database Design', 'Serverless Functions', 'CMS Integration'],
-  },
-  {
-    id: 'digital-transformation',
-    title: 'Digital Transformation',
-    description: 'We help businesses modernize their digital infrastructure for improved efficiency and growth.',
-    image: '/placeholder.svg?height=400&width=600',
-    items: ['Legacy System Migration', 'Cloud Deployment', 'DevOps', 'Microservices', 'Performance Optimization'],
-  },
-  {
-    id: 'web-applications',
-    title: 'Web Applications',
-    description: 'We create custom web applications that solve complex business problems and streamline operations.',
-    image: '/placeholder.svg?height=400&width=600',
-    items: ['SaaS Products', 'Admin Dashboards', 'Customer Portals', 'Web Tools', 'Progressive Web Apps'],
-  },
-];
+import { useRef } from 'react';
 
 export default function ServicesPage() {
   const pageRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    let ctx: any;
-    let isMounted = true;
-    (async () => {
-      const { gsap } = await import('gsap');
-      if (!isMounted) return;
-      ctx = gsap.context(() => {
-        // Animate page title
-        gsap.fromTo('.page-title', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.2, ease: 'power2.out' });
-
-        // Animate service items
-        gsap.utils.toArray('.service-card').forEach((card: any, i) => {
-          gsap.fromTo(card, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.2 + i * 0.1, ease: 'power2.out' });
-        });
-      }, pageRef);
-    })();
-    return () => {
-      isMounted = false;
-      if (ctx) ctx.revert();
-    };
-  }, []);
+  const services = [
+    {
+      id: 'web-development',
+      title: 'Web Development',
+      description: 'We build fast, responsive, and user-friendly websites using the latest web technologies to help you grow.',
+      image: '/placeholder.svg?height=600&width=400',
+      items: ['Next.js', 'React', 'Vue.js', 'WordPress', 'Tailwind CSS', 'Full-Stack'],
+    },
+    {
+      id: 'e-commerce',
+      title: 'E-commerce Solutions',
+      description: 'Custom online stores that drive sales and provide seamless shopping experiences across devices.',
+      image: '/placeholder.svg?height=600&width=400',
+      items: ['Shopify', 'WooCommerce', 'Custom Stores', 'Payment Integration', 'Inventory Management'],
+    },
+    {
+      id: 'backend-systems',
+      title: 'Backend Systems',
+      description: 'Robust, scalable backend systems that power your digital products with reliability and speed.',
+      image: '/placeholder.svg?height=600&width=400',
+      items: ['API Development', 'Node.js', 'Python', 'Database Design', 'Serverless Functions', 'CMS Integration'],
+    },
+    {
+      id: 'digital-transformation',
+      title: 'Digital Transformation',
+      description: 'Modernize your digital infrastructure for improved efficiency, performance, and long-term growth.',
+      image: '/placeholder.svg?height=600&width=400',
+      items: ['Legacy Migration', 'Cloud Deployment', 'DevOps', 'Microservices', 'Performance Optimization'],
+    },
+  ];
 
   return (
     <div ref={pageRef} className="min-h-screen">
       <Navbar />
 
-      <main className="pt-24 pb-20">
+      <main className="pt-24 pb-20 mt-10">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto mb-16 text-center">
-            <h1 className="page-title text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Our <span className="italic font-normal">Services</span>
+          {/* Header (match portfolio style) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-end mb-14">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+              Services<span className="text-primary">.</span>
             </h1>
-            <p className="text-lg text-muted-foreground">
-              We offer comprehensive web development services to power your digital presence. From responsive websites to complex applications, we build solutions that drive results.
-            </p>
+            <div>
+              <p className="text-base md:text-lg text-muted-foreground">We design, build, and scale modern web products. Explore our capabilities and see how we can help your business grow.</p>
+              <div className="mt-4">
+                <Link href="#capabilities" className="inline-flex items-center gap-2 text-sm text-primary">
+                  Explore Sengiku Studio Services <ArrowUpRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
           </div>
 
-          <div className="space-y-16">
-            {services.map((service, index) => (
-              <div key={service.id} className="service-card border-t border-border pt-8">
-                <div className="grid md:grid-cols-2 gap-8 items-center">
-                  <div>
-                    <h2 className="text-3xl font-bold mb-4">{service.title}</h2>
-                    <p className="text-muted-foreground mb-6">{service.description}</p>
-
-                    <div className="flex flex-wrap gap-3 mb-6">
-                      {service.items.map((item, i) => (
-                        <span key={i} className="px-4 py-2 rounded-full bg-muted text-sm">
-                          {item}
-                        </span>
-                      ))}
-                    </div>
-
-                    <Link href={`/services/${service.id}`}>
-                      <Button variant="outline" className="rounded-full group">
-                        Learn More <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                      </Button>
+          {/* Services - alternating layout (match portfolio sections) */}
+          <div id="capabilities" className="space-y-16">
+            {services.map((service, index) => {
+              const isImageLeft = index % 2 === 0;
+              return (
+                <div key={service.id} className="border-t pt-10">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                    {/* Image */}
+                    <Link href={`/services/${service.id}`} className={`${isImageLeft ? '' : 'md:order-2'} group relative overflow-hidden rounded-xl border bg-card`}>
+                      <img
+                        src={service.image || '/placeholder.svg'}
+                        alt={service.title}
+                        className="w-full h-full object-cover aspect-video md:aspect-[4/3] transition-transform duration-700 group-hover:scale-[1.03]"
+                      />
+                      <div className="absolute right-4 bottom-4 w-10 h-10 rounded-full bg-white/90 text-black flex items-center justify-center transition-all translate-y-1 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+                        <ArrowRight className="h-5 w-5" />
+                      </div>
                     </Link>
-                  </div>
 
-                  <div className="order-first md:order-last">
-                    <img src={service.image || '/placeholder.svg'} alt={service.title} className="w-full rounded-lg object-cover aspect-video" />
+                    {/* Details */}
+                    <div className={`${isImageLeft ? '' : 'md:order-1'}`}>
+                      <h3 className="text-2xl md:text-3xl font-semibold tracking-tight">{service.title}</h3>
+                      <p className="mt-3 text-sm md:text-base text-muted-foreground max-w-prose">{service.description}</p>
+
+                      <div className="mt-6 flex flex-wrap gap-2">
+                        {service.items.map((tag) => (
+                          <span key={tag} className="px-3 py-1 text-xs rounded-full border bg-muted/40">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
-          <div className="mt-20 text-center">
-            <h3 className="text-2xl font-bold mb-4">Ready to launch your web project?</h3>
-            <p className="text-muted-foreground mb-8 max-w-xl mx-auto">Let's build something exceptional together. Our team of web specialists is ready to turn your ideas into reality.</p>
-            <Link href="/contact">
-              <Button className="rounded-full px-8">
-                Start Your Project <ArrowUpRight className="ml-2 h-4 w-4" />
+          {/* CTA Section (match portfolio) */}
+          <div className="mt-24 grid grid-cols-1 md:grid-cols-2 gap-10 items-center border-y py-14">
+            <div>
+              <h3 className="text-4xl md:text-5xl font-semibold tracking-tight">
+                Let's Work
+                <br />
+                Together
+              </h3>
+              <p className="mt-6 text-muted-foreground max-w-md">Get in touch for a no obligation casual chat to discuss your needs. Our door is always open for a good cup of coffee.</p>
+            </div>
+            <div className="flex md:justify-end">
+              <Button asChild variant="outline" size="icon" className="rounded-full w-16 h-16">
+                <Link href="/contact">
+                  <ArrowUpRight className="h-6 w-6" />
+                </Link>
               </Button>
-            </Link>
+            </div>
           </div>
         </div>
       </main>
