@@ -2,11 +2,9 @@
 
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, Check } from 'lucide-react';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 // Define pricing plans with USD pricing
 const plans = [
@@ -92,69 +90,7 @@ export default function PricingSection() {
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const ctx = gsap.context(() => {
-      // Animate section title
-      gsap.fromTo(
-        '.pricing-title',
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          scrollTrigger: {
-            trigger: '.pricing-title',
-            start: 'top 80%',
-            end: 'bottom 20%',
-            toggleActions: 'play none none none',
-          },
-        }
-      );
-
-      // Animate pricing toggle
-      gsap.fromTo(
-        '.pricing-toggle',
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          delay: 0.2,
-          scrollTrigger: {
-            trigger: '.pricing-toggle',
-            start: 'top 80%',
-            end: 'bottom 20%',
-            toggleActions: 'play none none none',
-          },
-        }
-      );
-
-      // Animate pricing cards
-      gsap.utils.toArray('.pricing-card').forEach((card: any, i) => {
-        gsap.fromTo(
-          card,
-          { opacity: 0, y: 30 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            delay: 0.2 * (i + 1),
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: card,
-              start: 'top 85%',
-              end: 'bottom 20%',
-              toggleActions: 'play none none none',
-            },
-          }
-        );
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
+  // Scroll animations handled globally by `ScrollAnimator` using data attributes
 
   // Deterministic USD formatter to avoid SSR/CSR Intl differences
   const formatPrice = (price: number) => {
@@ -168,7 +104,7 @@ export default function PricingSection() {
   return (
     <section ref={sectionRef} id="pricing" className="section-pad bg-background subtle-section-gradient">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16" data-animate>
           <h2 className="pricing-title section-header mb-3">
             Simple, <span className="italic font-normal">Transparent</span> Pricing
           </h2>
@@ -177,7 +113,7 @@ export default function PricingSection() {
           </p>
 
           {/* Pricing toggle */}
-          <div className="pricing-toggle inline-flex items-center bg-muted rounded-full p-1 mb-12">
+          <div className="pricing-toggle inline-flex items-center bg-muted rounded-full p-1 mb-12" data-animate data-animate-delay="120">
             <button
               className={cn('px-6 py-2 rounded-full text-sm transition-all', billingCycle === 'monthly' ? 'bg-primary text-primary-foreground shadow-sm' : 'hover:text-foreground')}
               onClick={() => setBillingCycle('monthly')}
@@ -201,6 +137,8 @@ export default function PricingSection() {
                 'pricing-card relative panel p-8 bg-card transition-all duration-300 hover:shadow-lg hover:border-primary/30 flex flex-col h-full',
                 plan.popular && 'ring-2 ring-primary/30 shadow-md'
               )}
+              data-animate
+              data-animate-delay={(index * 140).toString()}
             >
               {plan.popular && (
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -245,7 +183,7 @@ export default function PricingSection() {
         </div>
 
         {/* Enterprise callout */}
-        <div className="mt-16 text-center max-w-4xl mx-auto">
+        <div className="mt-16 text-center max-w-4xl mx-auto" data-animate data-animate-delay="160">
           <h3 className="text-xl font-semibold mb-4">Need a custom enterprise solution?</h3>
           <p className="text-muted-foreground mb-6">
             We offer bespoke development packages for large-scale projects, custom integrations, and specialized requirements. Contact us to discuss your enterprise needs.

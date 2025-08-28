@@ -1,3 +1,4 @@
+import ScrollAnimator from '@/components/scroll-animator';
 import { ThemeProvider } from '@/components/theme-provider';
 import type { Metadata } from 'next';
 import { Urbanist } from 'next/font/google';
@@ -23,6 +24,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${urbanist.variable} font-sans`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+          <ScrollAnimator />
           {children}
         </ThemeProvider>
       </body>
