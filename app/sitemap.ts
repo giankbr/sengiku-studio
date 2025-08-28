@@ -1,5 +1,8 @@
 import type { MetadataRoute } from 'next';
 
+export const dynamic = 'force-static';
+export const revalidate = 60 * 60 * 24; // 24h
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://sengiku.studio';
 
