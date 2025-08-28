@@ -1,11 +1,11 @@
-let userConfig = undefined
+let userConfig = undefined;
 try {
   // try to import ESM first
-  userConfig = await import('./v0-user-next.config.mjs')
+  userConfig = await import('./v0-user-next.config.mjs');
 } catch (e) {
   try {
     // fallback to CJS import
-    userConfig = await import("./v0-user-next.config");
+    userConfig = await import('./v0-user-next.config');
   } catch (innerError) {
     // ignore error
   }
@@ -27,25 +27,69 @@ const nextConfig = {
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
   },
-}
+  async headers() {
+    const securityHeaders = [
+      { key: 'X-Content-Type-Options', value: 'nosniff' },
+      { key: 'X-Frame-Options', value: 'DENY' },
+      { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+      { key: 'X-XSS-Protection', value: '0' },
+      {
+        key: 'Permissions-Policy',
+        value: [
+          'accelerometer=()',
+          'autoplay=()',
+          'camera=()',
+          'display-capture=()',
+          'encrypted-media=()',
+          'fullscreen=(self)',
+          'geolocation=()',
+          'gyroscope=()',
+          'magnetometer=()',
+          'microphone=()',
+          'midi=()',
+          'payment=()',
+          'usb=()',
+        ].join(', '),
+      },
+      // Very strict CSP to minimize injected script/style visibility.
+      // Note: CSP has limited effect on XML rendering, but is harmless and helpful for HTML.
+      {
+        key: 'Content-Security-Policy',
+        value: [
+          "default-src 'none'",
+          "base-uri 'none'",
+          "form-action 'none'",
+          "frame-ancestors 'none'",
+          "img-src 'self' data:",
+          "style-src 'self' 'unsafe-inline'",
+          "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+          "connect-src 'self'",
+          "font-src 'self' data:",
+          "manifest-src 'self'",
+          "object-src 'none'",
+          "media-src 'self'",
+        ].join('; '),
+      },
+    ];
+
+    return [{ source: '/:path*', headers: securityHeaders }];
+  },
+};
 
 if (userConfig) {
   // ESM imports will have a "default" property
-  const config = userConfig.default || userConfig
+  const config = userConfig.default || userConfig;
 
   for (const key in config) {
-    if (
-      typeof nextConfig[key] === 'object' &&
-      !Array.isArray(nextConfig[key])
-    ) {
+    if (typeof nextConfig[key] === 'object' && !Array.isArray(nextConfig[key])) {
       nextConfig[key] = {
         ...nextConfig[key],
         ...config[key],
-      }
+      };
     } else {
-      nextConfig[key] = config[key]
+      nextConfig[key] = config[key];
     }
   }
 }
 
-export default nextConfig
+export default nextConfig;
