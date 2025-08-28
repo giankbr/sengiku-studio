@@ -58,7 +58,7 @@ export default function Footer() {
             <div className="lg:col-span-2">
               <h2 className="text-3xl font-bold mb-4">Sengiku Studio</h2>
               <p className="text-muted-foreground max-w-md mb-6">
-                We transform ideas into impactful experiences. Our creative design agency specializes in graphic design, product design, and illustration.
+                We build fast, modern, and scalable websites that empower your brand online. Turning technical complexity into seamless digital experiences.
               </p>
               <div className="flex space-x-4">
                 <a href="#" className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-muted transition-colors">

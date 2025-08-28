@@ -18,8 +18,10 @@ const projects = [
     description: "A comprehensive mobile app for pet owners to manage their pets' health, schedule vet appointments, and shop for pet supplies.",
     client: 'PetCare Inc.',
     year: '2024',
+    date: 'June 30, 2024',
     image: '/placeholder.svg?height=600&width=400',
     featured: true,
+    tags: ['Strategy', 'Design', 'Development'],
   },
   {
     id: 'arteco-brand',
@@ -28,8 +30,10 @@ const projects = [
     description: 'Complete brand identity for an eco-friendly art supply company, including logo design, packaging, and digital assets.',
     client: 'Arteco Supplies',
     year: '2023',
+    date: 'December 4, 2023',
     image: '/placeholder.svg?height=600&width=400',
     featured: true,
+    tags: ['Research', 'Brand System', 'Guidelines'],
   },
   {
     id: 'nomad-website',
@@ -38,8 +42,10 @@ const projects = [
     description: 'A responsive website for a travel blog focusing on off-the-beaten-path destinations and authentic experiences.',
     client: 'Nomad Explorers',
     year: '2024',
+    date: 'August 19, 2024',
     image: '/placeholder.svg?height=600&width=400',
     featured: true,
+    tags: ['Product Roadmap', 'Design', 'Dev'],
   },
   {
     id: 'lumina-ux',
@@ -48,8 +54,10 @@ const projects = [
     description: 'User interface and experience design for a smart home control system, focusing on accessibility and intuitive interactions.',
     client: 'Lumina Tech',
     year: '2023',
+    date: 'May 9, 2023',
     image: '/placeholder.svg?height=600&width=400',
     featured: true,
+    tags: ['Research', 'Strategy', 'Design'],
   },
   {
     id: 'verde-branding',
@@ -58,8 +66,10 @@ const projects = [
     description: 'Brand identity for a sustainable fashion label, including logo, color palette, typography, and brand guidelines.',
     client: 'Verde Fashion',
     year: '2023',
+    date: 'October 14, 2023',
     image: '/placeholder.svg?height=600&width=400',
     featured: false,
+    tags: ['Identity', 'Packaging'],
   },
   {
     id: 'pulse-app',
@@ -68,8 +78,10 @@ const projects = [
     description: 'Fitness tracking app with personalized workout plans, nutrition guidance, and progress visualization.',
     client: 'Pulse Fitness',
     year: '2022',
+    date: 'March 7, 2022',
     image: '/placeholder.svg?height=600&width=400',
     featured: false,
+    tags: ['iOS', 'Android', 'Dev'],
   },
   {
     id: 'horizon-website',
@@ -78,8 +90,10 @@ const projects = [
     description: 'Corporate website for a renewable energy company, highlighting their innovative solutions and global impact.',
     client: 'Horizon Energy',
     year: '2023',
+    date: 'July 2, 2023',
     image: '/placeholder.svg?height=600&width=400',
     featured: false,
+    tags: ['Design', 'Development', 'Maintenance'],
   },
   {
     id: 'bloom-illustrations',
@@ -88,8 +102,10 @@ const projects = [
     description: 'Series of botanical illustrations for a gardening app, featuring detailed plant drawings and care instructions.',
     client: 'Bloom Gardens',
     year: '2022',
+    date: 'January 11, 2022',
     image: '/placeholder.svg?height=600&width=400',
     featured: false,
+    tags: ['Illustration'],
   },
 ];
 
@@ -144,112 +160,105 @@ export default function ProjectsPage() {
 
       <main className="pt-24 pb-20">
         <div className="container mx-auto px-4">
-          {/* Hero */}
-          <div className="max-w-4xl mx-auto mb-12 text-center">
-            <h1 className="page-title text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-5">
-              Work that <span className="text-primary">solves problems</span>, builds brands, and <span className="text-primary">drives growth</span>.
+          {/* Header */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-end mb-14">
+            <h1 className="page-title text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+              Portfolio<span className="text-primary">.</span>
             </h1>
-            <p className="text-base md:text-lg text-muted-foreground">A curated selection of recent projects across product, web, and brand. Filter by category to explore specific work.</p>
+            <div>
+              <p className="text-base md:text-lg text-muted-foreground">
+                Our portfolio showcases our previous work and highlights the quality of our services. Browse through our projects and see for yourself.
+              </p>
+              <div className="mt-4">
+                <Link href="#projects" className="inline-flex items-center gap-2 text-sm text-primary">
+                  Explore Sengiku Studio Portfolio <ArrowUpRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
           </div>
 
-          {/* Filter Categories */}
-          <div className="mb-12 flex flex-wrap justify-center gap-3">
+          {/* Category filter (optional) */}
+          <div className="mb-10 flex flex-wrap gap-3">
             {categories.map((category) => (
-              <Button key={category} variant={activeCategory === category ? 'default' : 'outline'} className="rounded-full" onClick={() => setActiveCategory(category)}>
+              <Button key={category} variant={activeCategory === category ? 'default' : 'outline'} className="rounded-full h-9 px-4" onClick={() => setActiveCategory(category)}>
                 {category}
               </Button>
             ))}
           </div>
 
-          {/* Showcase */}
-          {activeCategory === 'All' && (
-            <div className="mb-16">
-              <h2 className="text-2xl font-bold mb-6">
-                Project <span className="text-primary">Showcase</span>
-              </h2>
-              <div className="grid md:grid-cols-2 gap-8">
-                {projects
-                  .filter((project) => project.featured)
-                  .map((project, index) => (
-                    <Link href={`/projects/${project.id}`} key={project.id} className="project-card group">
-                      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border bg-card" onMouseEnter={() => setHoveredProject(index)} onMouseLeave={() => setHoveredProject(null)}>
-                        <img src={project.image || '/placeholder.svg'} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-
-                        {/* Overlay tags + arrow */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                        <div className="absolute left-4 bottom-4 flex gap-2">
-                          <span className="px-2 py-1 text-[11px] rounded-full bg-white/90 text-black">{project.category}</span>
-                          <span className="px-2 py-1 text-[11px] rounded-full bg-white/60 text-black">{project.year}</span>
-                        </div>
-                        <div className="absolute right-4 bottom-4 w-10 h-10 rounded-full bg-white/90 text-black flex items-center justify-center translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all">
-                          <ArrowRight className="h-5 w-5" />
-                        </div>
-                      </div>
-
-                      {/* Info */}
-                      <div className="flex justify-between items-center mt-4 px-1">
-                        <div>
-                          <h3 className="text-xl font-bold tracking-tight">{project.title}</h3>
-                          <p className="text-sm text-muted-foreground">{project.category}</p>
-                        </div>
-                        <span className="text-sm text-muted-foreground">{project.year}</span>
+          {/* Projects - alternating layout */}
+          <div id="projects" className="space-y-16">
+            {filteredProjects.map((project, index) => {
+              const isImageLeft = index % 2 === 0;
+              return (
+                <div key={project.id} className="project-card border-t pt-10">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                    {/* Image */}
+                    <Link
+                      href={`/projects/${project.id}`}
+                      className={`${isImageLeft ? '' : 'md:order-2'} group relative overflow-hidden rounded-xl border bg-card`}
+                      onMouseEnter={() => setHoveredProject(index)}
+                      onMouseLeave={() => setHoveredProject(null)}
+                    >
+                      <img
+                        src={project.image || '/placeholder.svg'}
+                        alt={project.title}
+                        className="w-full h-full object-cover aspect-video md:aspect-[4/3] transition-transform duration-700 group-hover:scale-[1.03]"
+                      />
+                      <div
+                        className={`absolute right-4 bottom-4 w-10 h-10 rounded-full bg-white/90 text-black flex items-center justify-center transition-all ${
+                          hoveredProject === index ? 'translate-y-0 opacity-100' : 'translate-y-1 opacity-0'
+                        }`}
+                      >
+                        <ArrowRight className="h-5 w-5" />
                       </div>
                     </Link>
-                  ))}
-              </div>
-            </div>
-          )}
 
-          {/* All Projects */}
-          <div>
-            <h2 className="text-2xl font-bold mb-6">{activeCategory === 'All' ? 'All Projects' : activeCategory}</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-              {filteredProjects.map((project, index) => (
-                <Link href={`/projects/${project.id}`} key={project.id} className="project-card group">
-                  <div
-                    className="relative aspect-square overflow-hidden rounded-2xl border bg-card"
-                    onMouseEnter={() => setHoveredProject(index + 100)} // Offset to avoid conflict with featured projects
-                    onMouseLeave={() => setHoveredProject(null)}
-                  >
-                    <img src={project.image || '/placeholder.svg'} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    {/* Details */}
+                    <div className={`${isImageLeft ? '' : 'md:order-1'}`}>
+                      <h3 className="text-2xl md:text-3xl font-semibold tracking-tight">{project.title}</h3>
+                      <p className="mt-3 text-sm md:text-base text-muted-foreground max-w-prose">{project.description}</p>
 
-                    {/* Overlay tags + arrow */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <div className="absolute left-3 bottom-3 flex gap-2">
-                      <span className="px-2 py-1 text-[11px] rounded-full bg-white/90 text-black">{project.category}</span>
-                      <span className="px-2 py-1 text-[11px] rounded-full bg-white/60 text-black">{project.year}</span>
-                    </div>
-                    <div
-                      className={`absolute right-3 bottom-3 w-9 h-9 rounded-full bg-white/90 text-black flex items-center justify-center transition-all ${
-                        hoveredProject === index + 100 ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'
-                      }`}
-                    >
-                      <ArrowRight className="h-4 w-4" />
+                      <div className="mt-6 grid grid-cols-2 gap-6 text-sm">
+                        <div>
+                          <div className="text-muted-foreground">Project Date</div>
+                          <div className="mt-1">{project.date ?? project.year}</div>
+                        </div>
+                        <div>
+                          <div className="text-muted-foreground">Client</div>
+                          <div className="mt-1">{project.client}</div>
+                        </div>
+                      </div>
+
+                      <div className="mt-6 flex flex-wrap gap-2">
+                        {(project.tags ?? [project.category, project.year]).map((tag) => (
+                          <span key={tag} className="px-3 py-1 text-xs rounded-full border bg-muted/40">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
-
-                  {/* Info below image */}
-                  <div className="flex justify-between items-center mt-3 px-1">
-                    <div>
-                      <h3 className="text-lg font-bold tracking-tight">{project.title}</h3>
-                      <p className="text-xs text-muted-foreground">{project.category}</p>
-                    </div>
-                    <span className="text-xs text-muted-foreground">{project.year}</span>
-                  </div>
-                </Link>
-              ))}
-            </div>
+                </div>
+              );
+            })}
           </div>
 
           {/* CTA Section */}
-          <div className="mt-20 py-12 px-8 bg-muted dark:bg-zinc-900 rounded-lg text-center max-w-3xl mx-auto">
-            <h3 className="text-2xl font-bold mb-4">Have a project in mind?</h3>
-            <p className="text-muted-foreground mb-6 max-w-xl mx-auto">Let's collaborate to bring your vision to life. Our team is ready to help you create something amazing.</p>
-            <Link href="/contact">
-              <Button className="rounded-full px-8">
-                Get in Touch <ArrowUpRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
+          <div className="mt-24 grid grid-cols-1 md:grid-cols-2 gap-10 items-center border-y py-14">
+            <div>
+              <h3 className="text-4xl md:text-5xl font-semibold tracking-tight">
+                Let's Work
+                <br />
+                Together
+              </h3>
+              <p className="mt-6 text-muted-foreground max-w-md">Get in touch for a no obligation casual chat to discuss your needs. Our door is always open for a good cup of coffee.</p>
+            </div>
+            <div className="flex md:justify-end">
+              <Link href="/contact" className="group inline-flex items-center justify-center w-16 h-16 rounded-full border hover:bg-primary hover:text-primary-foreground transition-colors">
+                <ArrowUpRight className="h-6 w-6 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
+            </div>
           </div>
         </div>
       </main>
