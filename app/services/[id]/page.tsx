@@ -4,7 +4,7 @@ import Footer from '@/components/footer';
 import Navbar from '@/components/navbar';
 import { Button } from '@/components/ui/button';
 // Lazy-load GSAP on client to avoid SSR issues
-import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
+import { ArrowUpRight, Check } from 'lucide-react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useEffect, useRef } from 'react';
@@ -205,109 +205,113 @@ export default function ServiceDetailPage() {
     <div ref={pageRef} className="min-h-screen">
       <Navbar />
 
-      <main className="pt-24 pb-20">
+      <main className="pt-24 pb-20 mt-10">
         <div className="container mx-auto px-4">
-          {/* Hero Section */}
-          <div className="mb-16">
-            <Link href="/services" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-6">
-              <ArrowLeft className="mr-2 h-4 w-4" /> Back to Services
-            </Link>
-
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
-                <h1 className="fade-in text-4xl md:text-5xl lg:text-6xl font-bold mb-6">{service.title}</h1>
-                <p className="fade-in text-xl text-muted-foreground mb-8">{service.description}</p>
-                <Link href="/contact" className="fade-in inline-block">
-                  <Button className="rounded-full">
-                    Get Started <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
+          {/* Header - match Services/Projects style */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-end mb-14">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+              {service.title}
+              <span className="text-primary">.</span>
+            </h1>
+            <div>
+              <p className="text-base md:text-lg text-muted-foreground">{service.description}</p>
+              <div className="mt-4">
+                <Link href="#details" className="inline-flex items-center gap-2 text-sm text-primary">
+                  Explore {service.title} <ArrowUpRight className="h-4 w-4" />
                 </Link>
               </div>
-
-              <div className="fade-in">
-                <img src={service.image || '/placeholder.svg'} alt={service.title} className="w-full rounded-lg object-cover" />
-              </div>
             </div>
           </div>
 
-          {/* Description Section */}
-          <div className="fade-in max-w-3xl mx-auto my-20">
-            <h2 className="text-3xl font-bold mb-6">Overview</h2>
-            <p className="text-lg leading-relaxed">{service.fullDescription}</p>
-          </div>
+          {/* Details - alternating like sections */}
+          <div id="details" className="space-y-16">
+            {/* Image + Overview */}
+            <div className="border-t pt-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div className="group relative overflow-hidden rounded-xl border bg-card">
+                  <img
+                    src={service.image || '/placeholder.svg'}
+                    alt={service.title}
+                    className="w-full h-full object-cover aspect-video md:aspect-[4/3] transition-transform duration-700 group-hover:scale-[1.03]"
+                  />
+                </div>
 
-          {/* Process and Benefits */}
-          <div className="grid md:grid-cols-2 gap-12 my-20">
-            <div className="fade-in bg-muted dark:bg-zinc-900 rounded-lg p-8">
-              <h2 className="text-2xl font-bold mb-6">Our Process</h2>
-              <ul className="space-y-4">
-                {service.process.map((step, index) => (
-                  <li key={index} className="flex items-start">
-                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary flex items-center justify-center mr-3 mt-0.5">
-                      <span className="text-xs text-primary-foreground font-medium">{index + 1}</span>
-                    </span>
-                    <span>{step}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                <div>
+                  <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">Overview</h2>
+                  <p className="mt-3 text-sm md:text-base text-muted-foreground max-w-prose">{service.fullDescription}</p>
 
-            <div className="fade-in bg-muted dark:bg-zinc-900 rounded-lg p-8">
-              <h2 className="text-2xl font-bold mb-6">Benefits</h2>
-              <ul className="space-y-4">
-                {service.benefits.map((benefit, index) => (
-                  <li key={index} className="flex items-start">
-                    <Check className="h-5 w-5 text-primary mr-3 flex-shrink-0 mt-0.5" />
-                    <span>{benefit}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* Portfolio Section */}
-          <div className="my-20">
-            <h2 className="fade-in text-3xl font-bold mb-10 text-center">Related Work</h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              {service.portfolio.map((item, index) => (
-                <div key={index} className="portfolio-item group cursor-pointer">
-                  <div className="overflow-hidden rounded-lg mb-4">
-                    <img src={item.image || '/placeholder.svg'} alt={item.title} className="w-full aspect-video object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <div className="mt-6">
+                    <Button asChild className="rounded-full">
+                      <Link href="/contact">Get Started</Link>
+                    </Button>
                   </div>
-                  <h3 className="text-xl font-medium group-hover:text-primary transition-colors">{item.title}</h3>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* CTA Section */}
-          {/* CTA Section */}
-          <div className="fade-in my-24 relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-primary/5 rounded-2xl -z-10"></div>
-            <div className="bg-muted dark:bg-zinc-900 rounded-2xl border border-border p-10 md:p-16 shadow-lg">
-              <div className="max-w-3xl mx-auto text-center">
-                <div className="flex items-center justify-center mb-6">
-                  <div className="w-16 h-1 bg-primary rounded-full"></div>
-                </div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to launch your next web project?</h2>
-                <p className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto">
-                  Let's collaborate to build a scalable, high-performance solution that drives real business results. Our development team is ready when you are.
-                </p>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <Link href="/contact">
-                    <Button size="lg" className="rounded-full px-8 py-6 text-base">
-                      Start Your Project <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                    </Button>
-                  </Link>
-                  <Link href="/portfolio">
-                    <Button variant="outline" size="lg" className="rounded-full px-8 py-6 text-base">
-                      View Our Work
-                    </Button>
-                  </Link>
                 </div>
               </div>
             </div>
-            <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 h-6 w-40 bg-gradient-to-r from-transparent via-primary/20 to-transparent blur-xl"></div>
+
+            {/* Process & Benefits */}
+            <div className="border-t pt-10">
+              <div className="grid md:grid-cols-2 gap-12">
+                <div className="bg-muted dark:bg-zinc-900 rounded-lg p-8">
+                  <h3 className="text-2xl font-bold mb-6">Our Process</h3>
+                  <ul className="space-y-4">
+                    {service.process.map((step, index) => (
+                      <li key={index} className="flex items-start">
+                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary flex items-center justify-center mr-3 mt-0.5">
+                          <span className="text-xs text-primary-foreground font-medium">{index + 1}</span>
+                        </span>
+                        <span>{step}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="bg-muted dark:bg-zinc-900 rounded-lg p-8">
+                  <h3 className="text-2xl font-bold mb-6">Benefits</h3>
+                  <ul className="space-y-4">
+                    {service.benefits.map((benefit, index) => (
+                      <li key={index} className="flex items-start">
+                        <Check className="h-5 w-5 text-primary mr-3 flex-shrink-0 mt-0.5" />
+                        <span>{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Related Work */}
+            <div className="border-t pt-10">
+              <h2 className="text-3xl font-bold mb-10">Related Work</h2>
+              <div className="grid md:grid-cols-3 gap-8">
+                {service.portfolio.map((item, index) => (
+                  <div key={index} className="portfolio-item group cursor-pointer">
+                    <div className="overflow-hidden rounded-lg border">
+                      <img src={item.image || '/placeholder.svg'} alt={item.title} className="w-full aspect-video object-cover transition-transform duration-500 group-hover:scale-105" />
+                    </div>
+                    <h3 className="mt-4 text-xl font-medium group-hover:text-primary transition-colors">{item.title}</h3>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* CTA - match Services/Projects */}
+          <div className="mt-24 grid grid-cols-1 md:grid-cols-2 gap-10 items-center border-y py-14">
+            <div>
+              <h3 className="text-4xl md:text-5xl font-semibold tracking-tight">
+                Let's Work
+                <br />
+                Together
+              </h3>
+              <p className="mt-6 text-muted-foreground max-w-md">Get in touch for a no obligation casual chat to discuss your needs. Our door is always open for a good cup of coffee.</p>
+            </div>
+            <div className="flex md:justify-end">
+              <Button asChild variant="outline" size="icon" className="rounded-full w-16 h-16">
+                <Link href="/contact">
+                  <ArrowUpRight className="h-6 w-6" />
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </main>

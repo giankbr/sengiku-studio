@@ -5,7 +5,7 @@ import Navbar from '@/components/navbar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 // Lazy-load GSAP on client to avoid SSR issues
-import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useEffect, useRef } from 'react';
@@ -181,125 +181,129 @@ export default function ProjectDetailPage() {
             <ArrowLeft className="mr-2 h-4 w-4" /> Back to Projects
           </Link>
 
-          {/* Project Header */}
-          <div className="mb-10 md:mb-12">
-            <div className="grid md:grid-cols-12 gap-8 items-start">
-              {/* Left: Title + description */}
-              <div className="md:col-span-8">
-                <div className="fade-in mb-4">
-                  <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">{project.category}</span>
+          {/* Full-width single column layout */}
+          <div className="max-w-5xl mx-auto">
+            {/* Header (match listing pages style) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-end mb-10 md:mb-12">
+              <h1 className="fade-in text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+                {project.title}
+                <span className="text-primary">.</span>
+              </h1>
+              <div>
+                <div className="fade-in mb-3">
+                  <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs md:text-sm font-medium">{project.category}</span>
                 </div>
-                <h1 className="fade-in text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-5">{project.title}</h1>
-                <p className="fade-in text-lg md:text-xl text-muted-foreground">{project.description}</p>
+                <p className="fade-in text-base md:text-lg text-muted-foreground">{project.description}</p>
               </div>
-
-              {/* Right: Meta card (sticky) */}
-              <aside className="md:col-span-4">
-                <div className="fade-in rounded-2xl border bg-card p-6 md:sticky md:top-28">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <h3 className="text-xs font-medium text-muted-foreground">Client</h3>
-                      <p className="text-sm mt-1">{project.client}</p>
-                    </div>
-                    <div>
-                      <h3 className="text-xs font-medium text-muted-foreground">Year</h3>
-                      <p className="text-sm mt-1">{project.year}</p>
-                    </div>
-                    <div>
-                      <h3 className="text-xs font-medium text-muted-foreground">Duration</h3>
-                      <p className="text-sm mt-1">{project.duration}</p>
-                    </div>
-                    <div className="col-span-2">
-                      <h3 className="text-xs font-medium text-muted-foreground">Services</h3>
-                      <div className="mt-2 flex flex-wrap gap-2">
-                        {project.services.map((svc) => (
-                          <Badge key={svc} variant="secondary" className="rounded-full">
-                            {svc}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </aside>
-            </div>
-          </div>
-
-          {/* Main Image */}
-          <div className="fade-in mb-16">
-            <img src={project.mainImage || '/placeholder.svg'} alt={project.title} className="w-full rounded-2xl border" />
-          </div>
-
-          {/* Project Details */}
-          <div className="max-w-3xl mx-auto mb-16">
-            <div className="fade-in mb-6 rounded-2xl border bg-card p-6">
-              <h2 className="text-xl md:text-2xl font-bold mb-3">The Challenge</h2>
-              <p className="text-muted-foreground">{project.challenge}</p>
             </div>
 
-            <div className="fade-in mb-6 rounded-2xl border bg-card p-6">
-              <h2 className="text-xl md:text-2xl font-bold mb-3">Our Solution</h2>
-              <p className="text-muted-foreground">{project.solution}</p>
-            </div>
-
-            <div className="fade-in rounded-2xl border bg-card p-6">
-              <h2 className="text-xl md:text-2xl font-bold mb-3">The Outcome</h2>
-              <p className="text-muted-foreground">{project.outcome}</p>
-            </div>
-          </div>
-
-          {/* Gallery */}
-          <div className="mb-16">
-            <h2 className="fade-in text-2xl font-bold mb-8 text-center">Project Gallery</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              {project.gallery.map((image, index) => (
-                <div key={index} className="gallery-item overflow-hidden rounded-2xl border">
-                  <img src={image || '/placeholder.svg'} alt={`${project.title} - Gallery ${index + 1}`} className="w-full" />
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Testimonial */}
-          {project.testimonial && (
-            <div className="fade-in max-w-3xl mx-auto mb-16 py-10 px-8 rounded-2xl border bg-card">
-              <blockquote className="text-xl italic mb-6">"{project.testimonial.quote}"</blockquote>
-              <div className="flex items-center">
-                <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
-                  <img src="/placeholder.svg?height=100&width=100" alt={project.testimonial.author} className="w-full h-full object-cover" />
+            {/* Meta row (replaces sticky sidebar) */}
+            <div className="fade-in mb-12 rounded-xl border bg-card p-6">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div>
+                  <h3 className="text-xs font-medium text-muted-foreground">Client</h3>
+                  <p className="text-sm mt-1">{project.client}</p>
                 </div>
                 <div>
-                  <p className="font-bold">{project.testimonial.author}</p>
-                  <p className="text-sm text-muted-foreground">{project.testimonial.position}</p>
+                  <h3 className="text-xs font-medium text-muted-foreground">Year</h3>
+                  <p className="text-sm mt-1">{project.year}</p>
+                </div>
+                <div>
+                  <h3 className="text-xs font-medium text-muted-foreground">Duration</h3>
+                  <p className="text-sm mt-1">{project.duration}</p>
+                </div>
+                <div className="col-span-2 md:col-span-1 md:col-start-4 md:self-start">
+                  <h3 className="text-xs font-medium text-muted-foreground">Services</h3>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {project.services.map((svc) => (
+                      <Badge key={svc} variant="secondary" className="rounded-full">
+                        {svc}
+                      </Badge>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          )}
 
-          {/* Next Project */}
-          <div className="fade-in max-w-3xl mx-auto text-center">
-            <p className="text-sm text-muted-foreground mb-2">Next Project</p>
-            <Link href={`/projects/${project.nextProject}`} className="inline-flex items-center justify-center gap-2 rounded-full border px-5 py-3 hover:bg-accent transition-colors">
-              <span className="text-base font-semibold">{projectsData[project.nextProject as keyof typeof projectsData]?.title}</span>
-              <ArrowRight className="h-5 w-5" />
-            </Link>
-          </div>
+            {/* Hero Image */}
+            <div className="fade-in mb-12">
+              <img src={project.mainImage || '/placeholder.svg'} alt={project.title} className="w-full rounded-2xl border" />
+            </div>
 
-          {/* CTA */}
-          <div className="fade-in mt-16 md:mt-20 py-8 md:py-12 px-4 md:px-8 bg-muted dark:bg-zinc-900 rounded-lg text-center max-w-3xl mx-auto">
-            <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">Interested in working with us?</h3>
-            <p className="text-sm md:text-base text-muted-foreground mb-6">Let's discuss how we can help bring your project to life with our development expertise.</p>
-            <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4">
-              <Link href="/contact" className="w-full sm:w-auto">
-                <Button className="rounded-full px-6 md:px-8 w-full sm:w-auto">
-                  Contact Us <ArrowRight className="ml-2 h-4 w-4" />
+            {/* Details Sections (with separators like listing) */}
+            <div className="space-y-10 mb-12">
+              <div className="fade-in border-t pt-8 rounded-none">
+                <h2 className="text-xl md:text-2xl font-bold mb-3">The Challenge</h2>
+                <p className="text-muted-foreground">{project.challenge}</p>
+              </div>
+
+              <div className="fade-in border-t pt-8 rounded-none">
+                <h2 className="text-xl md:text-2xl font-bold mb-3">Our Solution</h2>
+                <p className="text-muted-foreground">{project.solution}</p>
+              </div>
+
+              <div className="fade-in border-t pt-8 rounded-none">
+                <h2 className="text-xl md:text-2xl font-bold mb-3">The Outcome</h2>
+                <p className="text-muted-foreground">{project.outcome}</p>
+              </div>
+            </div>
+
+            {/* Gallery */}
+            <div className="mb-16">
+              <h2 className="fade-in text-2xl font-bold mb-6">Project Gallery</h2>
+              <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
+                {project.gallery.map((image, index) => (
+                  <div key={index} className="gallery-item overflow-hidden rounded-2xl border">
+                    <img src={image || '/placeholder.svg'} alt={`${project.title} - Gallery ${index + 1}`} className="w-full" />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Testimonial */}
+            {project.testimonial && (
+              <div className="fade-in mb-16 border-t pt-10">
+                <blockquote className="text-xl italic mb-6">"{project.testimonial.quote}"</blockquote>
+                <div className="flex items-center">
+                  <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
+                    <img src="/placeholder.svg?height=100&width=100" alt={project.testimonial.author} className="w-full h-full object-cover" />
+                  </div>
+                  <div>
+                    <p className="font-bold">{project.testimonial.author}</p>
+                    <p className="text-sm text-muted-foreground">{project.testimonial.position}</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Next Project */}
+            <div className="fade-in border-t pt-10">
+              <div className="flex items-center justify-between">
+                <p className="text-sm text-muted-foreground">Next Project</p>
+                <Link href={`/projects/${project.nextProject}`} className="inline-flex items-center gap-2 rounded-full border px-4 py-2 hover:bg-accent transition-colors">
+                  <span className="text-sm font-medium">{projectsData[project.nextProject as keyof typeof projectsData]?.title}</span>
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+
+            {/* CTA (match listing pages style) */}
+            <div className="fade-in mt-20 grid grid-cols-1 md:grid-cols-2 gap-10 items-center border-y py-14">
+              <div>
+                <h3 className="text-4xl md:text-5xl font-semibold tracking-tight">
+                  Let's Work
+                  <br />
+                  Together
+                </h3>
+                <p className="mt-6 text-muted-foreground max-w-md">Get in touch for a no obligation casual chat to discuss your needs. Our door is always open for a good cup of coffee.</p>
+              </div>
+              <div className="flex md:justify-end">
+                <Button asChild variant="outline" size="icon" className="rounded-full w-16 h-16">
+                  <Link href="/contact">
+                    <ArrowUpRight className="h-6 w-6" />
+                  </Link>
                 </Button>
-              </Link>
-              <Link href="/projects" className="w-full sm:w-auto">
-                <Button variant="outline" className="rounded-full px-6 md:px-8 w-full sm:w-auto mt-2 sm:mt-0">
-                  View All Projects <ExternalLink className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
+              </div>
             </div>
           </div>
         </div>
