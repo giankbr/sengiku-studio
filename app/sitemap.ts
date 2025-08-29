@@ -7,7 +7,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://sengiku.studio';
 
   // Static routes. Add dynamic routes if needed by fetching data.
-  const routes = ['', '/services', '/projects', '/contact'];
+  const routes = ['', '/about', '/services', '/projects', '/blogs', '/faq', '/contact'];
 
   const now = new Date();
   return routes.map((route) => ({

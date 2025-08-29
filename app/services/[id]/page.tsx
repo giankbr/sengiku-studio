@@ -4,7 +4,7 @@ import Footer from '@/components/footer';
 import Navbar from '@/components/navbar';
 import { Button } from '@/components/ui/button';
 // Lazy-load GSAP on client to avoid SSR issues
-import { ArrowUpRight, Check } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, Check } from 'lucide-react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useEffect, useRef } from 'react';
