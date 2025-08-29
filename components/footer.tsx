@@ -51,7 +51,7 @@ export default function Footer() {
   return (
     <footer ref={footerRef} className="py-16 border-t border-border bg-background">
       <div className="container mx-auto px-4">
-        <div className="footer-content flex flex-col gap-12">
+        <div className="footer-content flex flex-col gap-6">
           {/* Top section with logo and info */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
             {/* Logo and description */}
@@ -138,7 +138,7 @@ export default function Footer() {
           </div>
 
           {/* Bottom section with copyright and back to top */}
-          <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-border">
+          <div className="flex flex-col md:flex-row justify-between items-center pt-4 border-t border-border">
             <p className="text-sm text-muted-foreground mb-4 md:mb-0">© {new Date().getFullYear()} Sengiku Studio. All rights reserved.</p>
 
             <button onClick={scrollToTop} className="p-3 rounded-full border border-border hover:bg-muted transition-colors" aria-label="Back to top">
