@@ -28,6 +28,7 @@ const nextConfig = {
     parallelServerCompiles: true,
   },
   async headers() {
+    const isDev = process.env.NODE_ENV !== 'production';
     const securityHeaders = [
       { key: 'X-Content-Type-Options', value: 'nosniff' },
       { key: 'X-Frame-Options', value: 'DENY' },
@@ -55,20 +56,32 @@ const nextConfig = {
       // Note: CSP has limited effect on XML rendering, but is harmless and helpful for HTML.
       {
         key: 'Content-Security-Policy',
-        value: [
-          "default-src 'none'",
-          "base-uri 'none'",
-          "form-action 'none'",
-          "frame-ancestors 'none'",
-          "img-src 'self' data:",
-          "style-src 'self' 'unsafe-inline'",
-          "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
-          "connect-src 'self'",
-          "font-src 'self' data:",
-          "manifest-src 'self'",
-          "object-src 'none'",
-          "media-src 'self'",
-        ].join('; '),
+        value: (() => {
+          const csp = [
+            "default-src 'none'",
+            "base-uri 'none'",
+            "form-action 'self'",
+            "frame-ancestors 'none'",
+            "img-src 'self' data:",
+            // Allow Google Fonts stylesheet in both envs if used
+            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+            // Next.js dev and some tools rely on eval; keep as-is
+            "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+            // Will extend connect-src in dev below
+            "connect-src 'self'",
+            // Allow Google Fonts font files
+            "font-src 'self' data: https://fonts.gstatic.com",
+            "manifest-src 'self'",
+            "object-src 'none'",
+            "media-src 'self'",
+          ];
+
+          if (isDev) {
+            // Permit local websocket connections for HMR/devtools, any port
+            csp[csp.findIndex((d) => d.startsWith('connect-src'))] = "connect-src 'self' ws://localhost:* ws://127.0.0.1:*";
+          }
+          return csp.join('; ');
+        })(),
       },
     ];
 
