@@ -171,9 +171,9 @@ export default function ContactSection() {
                     <div>
                       <h4 className="text-sm font-medium mb-1">Address</h4>
                       <p className="text-lg">
-                        2372 Westheimer Rd,
+                        Kembangan, Jakarta Barat
                         <br />
-                        Jakarta, Indonesia 85485
+                        Jakarta, Indonesia 11610
                       </p>
                     </div>
                   </div>

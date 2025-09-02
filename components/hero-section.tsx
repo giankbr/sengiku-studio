@@ -57,28 +57,6 @@ export default function HeroSection() {
             <SocialButton icon="twitter" />
             <SocialButton icon="instagram" />
           </div>
-
-          <div className="mt-16 flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-2 text-sm text-muted-foreground">
-            <a href="#" className="hover:text-foreground transition-colors">
-              Home
-            </a>
-            <span className="hidden md:inline">/</span>
-            <a href="#" className="hover:text-foreground transition-colors">
-              About Us
-            </a>
-            <span className="hidden md:inline">/</span>
-            <a href="#" className="hover:text-foreground transition-colors">
-              Projects
-            </a>
-            <span className="hidden md:inline">/</span>
-            <a href="#" className="hover:text-foreground transition-colors">
-              Services
-            </a>
-            <span className="hidden md:inline">/</span>
-            <a href="#" className="hover:text-foreground transition-colors">
-              Blogs
-            </a>
-          </div>
         </div>
       </div>
     </section>
