@@ -1,5 +1,6 @@
 import ScrollAnimator from '@/components/scroll-animator';
 import { ThemeProvider } from '@/components/theme-provider';
+import { Toaster } from '@/components/ui/sonner';
 import type { Metadata } from 'next';
 import { Urbanist } from 'next/font/google';
 import type React from 'react';
@@ -60,6 +61,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <ScrollAnimator />
           {children}
+          <Toaster richColors position="top-center" />
         </ThemeProvider>
       </body>
     </html>

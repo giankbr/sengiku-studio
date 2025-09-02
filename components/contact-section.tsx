@@ -9,6 +9,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, Clock, Mail, MapPin, Phone } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { toast } from 'sonner';
 
 export default function ContactSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -17,6 +18,7 @@ export default function ContactSection() {
     email: '',
     message: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -84,12 +86,28 @@ export default function ContactSection() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Here you would typically send the data to your backend
-    alert('Form submitted successfully!');
-    setFormData({ name: '', email: '', message: '' });
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+    const toastId = toast.loading('Sending message...');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data?.error || 'Failed to send');
+      }
+      toast.success('Message sent! We will get back to you soon.', { id: toastId });
+      setFormData({ name: '', email: '', message: '' });
+    } catch (err: any) {
+      toast.error(err?.message || 'Something went wrong', { id: toastId });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -128,7 +146,7 @@ export default function ContactSection() {
                     <Textarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="Tell us about your project..." rows={5} required className="w-full" />
                   </div>
 
-                  <Button type="submit" className="rounded-full w-full">
+                  <Button type="submit" className="rounded-full w-full" disabled={isSubmitting}>
                     Send Message <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </form>
