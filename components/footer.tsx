@@ -85,7 +85,7 @@ export default function Footer() {
                     Home
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link href="/about" className="text-muted-foreground hover:text-foreground transition-colors">
                     About Us
                   </Link>
@@ -109,7 +109,7 @@ export default function Footer() {
                   <Link href="/contact" className="text-muted-foreground hover:text-foreground transition-colors">
                     Contact
                   </Link>
-                </li>
+                </li> */}
               </ul>
             </div>
 
@@ -119,11 +119,11 @@ export default function Footer() {
               <ul className="space-y-4">
                 <li className="flex items-start">
                   <Phone className="h-5 w-5 mr-3 mt-0.5 text-muted-foreground" />
-                  <span className="text-muted-foreground">+1 891 989-11-91</span>
+                  <span className="text-muted-foreground">+6281779963472</span>
                 </li>
                 <li className="flex items-start">
                   <Mail className="h-5 w-5 mr-3 mt-0.5 text-muted-foreground" />
-                  <span className="text-muted-foreground">hello@sengikustudio.com</span>
+                  <span className="text-muted-foreground">sengikustudio@gmail.com</span>
                 </li>
                 <li className="flex items-start">
                   <MapPin className="h-5 w-5 mr-3 mt-0.5 text-muted-foreground" />
