@@ -1,6 +1,5 @@
 'use client';
 
-import BlogSection from '@/components/blog-section';
 import ContactSection from '@/components/contact-section';
 import FaqSection from '@/components/faq-section';
 import Footer from '@/components/footer';
@@ -65,7 +64,7 @@ export default function Home() {
       <PortfolioSection />
       <PricingSection />
       <FaqSection />
-      <BlogSection />
+      {/* <BlogSection /> */}
       <ContactSection />
       <Footer />
     </main>
