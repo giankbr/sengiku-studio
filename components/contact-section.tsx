@@ -147,7 +147,7 @@ export default function ContactSection() {
                     <div>
                       <h4 className="text-sm font-medium mb-1">Email</h4>
                       <a href="mailto:hello@sengikustudio.com" className="text-lg hover:text-primary transition-colors">
-                        hello@sengikustudio.com
+                        sengikustudio@gmail.com
                       </a>
                     </div>
                   </div>
@@ -158,8 +158,8 @@ export default function ContactSection() {
                     </div>
                     <div>
                       <h4 className="text-sm font-medium mb-1">Phone</h4>
-                      <a href="tel:+18919891191" className="text-lg hover:text-primary transition-colors">
-                        +1 891 989-11-91
+                      <a href="tel:+6281779963472" className="text-lg hover:text-primary transition-colors">
+                        +62817-7996-3472
                       </a>
                     </div>
                   </div>
