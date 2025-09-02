@@ -8,28 +8,28 @@ import { useEffect, useRef, useState } from 'react';
 
 const portfolioItems = [
   {
-    title: 'PETSHOP',
-    category: 'Mobile App Design',
-    image: '/placeholder.svg?height=600&width=400',
-    year: '2024',
+    title: 'Mogi Pay | Secure Payment Gateway',
+    category: 'Payment Gateway, Web Development',
+    image: '/portfolio/mogi-pay.png',
+    year: '2025',
   },
   {
-    title: 'ARTECO',
-    category: 'Brand Identity',
-    image: '/placeholder.svg?height=600&width=400',
-    year: '2023',
+    title: 'Mogi POS – Smart Point-of-Sale with Secure Payments',
+    category: 'POS System, Web Development',
+    image: '/portfolio/mogi-pos.png',
+    year: '2025',
   },
   {
-    title: 'NOMAD',
-    category: 'Web Design',
-    image: '/placeholder.svg?height=600&width=400',
-    year: '2024',
+    title: 'BANG MAT | Modern Online Magazine',
+    category: 'Web Development, UI/UX Design',
+    image: '/portfolio/bang-mat.png',
+    year: '2025',
   },
   {
-    title: 'LUMINA',
-    category: 'UI/UX Design',
-    image: '/placeholder.svg?height=600&width=400',
-    year: '2023',
+    title: 'CMS BANG MAT | Content Management System for Online Magazine',
+    category: 'Web Development, CMS Integration',
+    image: '/portfolio/cms-bang-mat.png',
+    year: '2025',
   },
 ];
 
@@ -102,6 +102,9 @@ export default function PortfolioSection() {
             <div key={index} className="portfolio-item relative overflow-hidden rounded-2xl group panel" onMouseEnter={() => setHoveredItem(index)} onMouseLeave={() => setHoveredItem(null)}>
               <div className="relative aspect-[4/5] overflow-hidden">
                 <img src={item.image || '/placeholder.svg'} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+
+                {/* Subtle dark-mode shadow overlay above image */}
+                <div className="absolute inset-0 pointer-events-none opacity-0 dark:opacity-100 bg-gradient-to-t from-black/40 via-black/20 to-transparent transition-opacity" />
 
                 {/* Overlay that appears on hover */}
                 <div className={`absolute inset-0 bg-black/60 flex items-center justify-center transition-opacity duration-300 ${hoveredItem === index ? 'opacity-100' : 'opacity-0'}`}>
