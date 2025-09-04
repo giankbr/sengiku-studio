@@ -128,9 +128,9 @@ export default function Footer() {
                 <li className="flex items-start">
                   <MapPin className="h-5 w-5 mr-3 mt-0.5 text-muted-foreground" />
                   <span className="text-muted-foreground">
-                    2372 Westheimer Rd,
+                    Kembangan, Jakarta Barat
                     <br />
-                    Jakarta, Indonesia 85485
+                    DKI Jakarta, Indonesia
                   </span>
                 </li>
               </ul>

@@ -191,7 +191,7 @@ export default function ContactSection() {
                       <p className="text-lg">
                         Kembangan, Jakarta Barat
                         <br />
-                        Jakarta, Indonesia 11610
+                        DKI Jakarta, Indonesia
                       </p>
                     </div>
                   </div>
